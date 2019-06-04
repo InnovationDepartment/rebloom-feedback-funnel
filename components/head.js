@@ -35,6 +35,14 @@ const Head = props => (
       @import
       url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i&display=swap');
     </style>
+    <style jsx global>
+      {`
+        html: {
+          margin: 0;
+          padding: 0;
+        }
+      `}
+    </style>
   </NextHead>
 )
 

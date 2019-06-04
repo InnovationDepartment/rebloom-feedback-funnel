@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Formik } from 'formik'
-
 import { media } from '../static/utils/style-utils'
+
+import Head from '../components/head'
 import { PrimaryButton } from '../components/buttons'
 import { Container } from '../components/container'
 import { TextInput } from '../components/inputs'
 import { H2, P } from '../components/text'
-import Head from '../components/head'
+import { TermsAndConditions } from '../components/TandC'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -38,25 +39,11 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `
 
-const TermsLinksContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: fit-content;
-  font-size: 22px;
-  margin-top: 32px;
-`
-
-const TermsLinks = styled(P)`
-  text-decoration: none !important;
-  color: #fff;
-  margin: 0;
-  cursor: pointer;
-`
-
 const StyledErrorP = styled(P)`
   font-size: 12px;
   margin: 6px 0 0 0;
   height: 16px;
+  font-style: normal;
 `
 
 class SignUp extends Component {
@@ -91,7 +78,7 @@ class SignUp extends Component {
                 return errors
               }}
               onSubmit={(values, { setSubmitting }) => {
-                console.log('IM SUBMITTING!') // TODO: Update
+                console.log('IM SUBMITTING!', values) // TODO: Update
                 setSubmitting(false)
               }}>
               {({
@@ -104,7 +91,6 @@ class SignUp extends Component {
                 isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit}>
-                  {console.log(isSubmitting)}
                   <div>
                     <TextInput
                       type="text"
@@ -161,15 +147,7 @@ class SignUp extends Component {
                 </form>
               )}
             </Formik>
-            <TermsLinksContainer>
-              <Link href="/terms-and-conditions">
-                <TermsLinks>Terms and Conditions </TermsLinks>
-              </Link>
-              {'  '}|{'  '}
-              <Link href="/privacy-policy">
-                <TermsLinks>Privacy Policy </TermsLinks>
-              </Link>
-            </TermsLinksContainer>
+            <TermsAndConditions />
           </TextContainer>
         </Container>
       </Fragment>

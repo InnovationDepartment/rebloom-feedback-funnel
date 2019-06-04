@@ -18,11 +18,12 @@ const TopImageBackground = styled.div`
   position: relative;
   cursor: default;
   height: 750px;
-  width: 100vw;
+  width: 100%;
 `
 
 const GreyBackground = styled.div`
   background-color: #faf9ff;
+  width: 100%;
 `
 
 const ContentContainer = styled.div`
@@ -86,12 +87,17 @@ const StyledErrorP = styled(P)`
   font-size: 12px;
   margin: 6px 0 0 0;
   height: 16px;
+  font-style: normal;
 `
 
 const StepImage = styled.img`
   width: 100%;
   height: auto;
   margin-bottom: 80px;
+`
+
+const StyledLink = styled.a`
+  color: #fff;
 `
 
 class OrderID extends Component {
@@ -159,7 +165,10 @@ class OrderID extends Component {
                   </form>
                 )}
               </Formik>
-              <StyledH4>Not an Amazon customer? Continue here.</StyledH4>
+              <StyledH4>
+                Not an Amazon customer?{'  '}
+                <StyledLink href="/error">Continue here.</StyledLink>
+              </StyledH4>
             </TextContainer>
           </ContentContainer>
         </TopImageBackground>
@@ -183,4 +192,4 @@ class OrderID extends Component {
   }
 }
 
-export default OrderID
+export default OrderID 

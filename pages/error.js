@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-
 import { media } from '../static/utils/style-utils'
 import { PrimaryButton } from '../components/buttons'
-import { H1, H2, H4, P } from '../components/text'
+import { H1, H2, H4 } from '../components/text'
 import { Container } from '../components/container'
+import { TermsAndConditions } from '../components/TandC'
 import Head from '../components/head'
 
 const LogoImage = styled.img`
@@ -17,10 +17,9 @@ const LogoImage = styled.img`
 `
 
 const StyledH2 = styled(H2)`
-  font-weight: 400; 
+  font-weight: 400;
   margin-bottom: 30px;
 `
-
 
 const StyledH4 = styled(H4)`
   font-style: normal;
@@ -43,50 +42,51 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `
 
-const TermsLinksContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: fit-content;
-  font-size: 22px;
-  margin-top: 62px;
-`
-
-const TermsLinks = styled(P)`
-  text-decoration: none !important;
+const EmailLink = styled.a`
   color: #fff;
   margin: 0;
   cursor: pointer;
+  margin: 0 6px;
 `
 
 class Error extends Component {
   render() {
+    const {
+      header = 'Oops!',
+      subheader = 'It looks like there was a problem.',
+      buttonCopy,
+      buttonDest,
+      body1 = 'Please try again.',
+      body2,
+      contactInfo,
+    } = this.props
+
     return (
       <Fragment>
         <Head title="reBloom" />
         <Container>
           <TextContainer>
             <LogoImage src="/static/images/logo-white.png" />
-            <H1>Oops!</H1>
-            <StyledH2>
-              Unfortunately, you don’t qualify for this offer. In the meantime,
-              get 25% off your next reBloom order.{' '}
-            </StyledH2>
-            <ButtonContainer>
-              <PrimaryButton>GET 25% OFF</PrimaryButton>
-            </ButtonContainer>
-            <StyledH4>
-              If you think this was an error, please write to our support team
-              at help@rebloom.com and we’ll be sure to take care of you.{' '}
-            </StyledH4>
-            <TermsLinksContainer>
-              <Link href="/terms-and-conditions">
-                <TermsLinks>Terms and Conditions </TermsLinks>
-              </Link>
-              {'  '}|{'  '}
-              <Link href="/privacy-policy">
-                <TermsLinks>Privacy Policy </TermsLinks>
-              </Link>
-            </TermsLinksContainer>
+            <H1>{header}</H1>
+            <StyledH2>{subheader}</StyledH2>
+            {body1 && <StyledH4>{body1}</StyledH4>}
+            {body2 && <StyledH4>{body2}</StyledH4>}
+            {buttonCopy && (
+              <ButtonContainer>
+                <PrimaryButton>{buttonCopy}</PrimaryButton>
+              </ButtonContainer>
+            )}
+            {contactInfo && (
+              <StyledH4>
+                If you think this was an error, please write to our support team
+                at
+                <EmailLink href="mailto:help@rebloom.com">
+                  help@rebloom.com
+                </EmailLink>
+                and we’ll be sure to take care of you.
+              </StyledH4>
+            )}
+            <TermsAndConditions />
           </TextContainer>
         </Container>
       </Fragment>

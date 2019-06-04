@@ -1,3 +1,3 @@
 ## reBloom
 
-Customer feedback and bonus offer funnel for [reBloom](https://www.rebloom.com).
+Customer feedback and bonus offer for [reBloom](https://rebloom.com/).

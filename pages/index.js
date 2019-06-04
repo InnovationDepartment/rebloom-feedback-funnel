@@ -2,10 +2,12 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { media } from '../static/utils/style-utils'
+
+import Head from '../components/head'
 import { Container } from '../components/container'
 import { PrimaryButton } from '../components/buttons'
 import { H1, H3, P } from '../components/text'
-import Head from '../components/head'
+import { TermsAndConditions } from '../components/TandC'
 
 const BottleImage = styled.img`
   height: 525px;
@@ -21,20 +23,6 @@ const TextContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   max-width: 700px;
-`
-
-const TermsLinksContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: fit-content;
-  font-size: 22px;
-`
-
-const TermsLinks = styled(P)`
-  text-decoration: none !important;
-  color: #fff;
-  margin: 0;
-  cursor: pointer;
 `
 
 const LandingPage = () => (
@@ -55,15 +43,7 @@ const LandingPage = () => (
             of purchase. Order must have been purchased with no discount code
             greater than 30%. Valid in the US only. Limit one per household.
           </P>
-          <TermsLinksContainer>
-            <Link href="/terms-and-conditions">
-              <TermsLinks>Terms and Conditions </TermsLinks>
-            </Link>
-            {'  '}|{'  '}
-            <Link href="/privacy-policy">
-              <TermsLinks>Privacy Policy </TermsLinks>
-            </Link>
-          </TermsLinksContainer>
+          <TermsAndConditions />
         </div>
       </TextContainer>
     </Container>
