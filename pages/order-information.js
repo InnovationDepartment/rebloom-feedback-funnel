@@ -3,14 +3,14 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { Formik } from 'formik'
 
-import { media } from '../static/utils/style-utils'
-import { PrimaryButton } from '../components/buttons'
-import { TextInput } from '../components/inputs'
-import { H2, H3, H4, P } from '../components/text'
-import Head from '../components/head'
+import { media } from '../src/utils/style-utils'
+import { PrimaryButton } from '../src/components/buttons'
+import { TextInput } from '../src/components/inputs'
+import { H2, H3, H4, P } from '../src/components/text'
+import Head from '../src/components/head'
 
 const TopImageBackground = styled.div`
-  background-image: url('/static/images/background.jpg');
+  background-image: url('/src/assets/images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
@@ -108,7 +108,7 @@ class OrderID extends Component {
         <TopImageBackground>
           <ContentContainer>
             <TextContainer>
-              <LogoImage src="/static/images/logo-white.png" />
+              <LogoImage src="/src/assets/images/logo-white.png" />
               <StyledH2>
                 Please find your Amazon Order ID from your reBloom purchase.
               </StyledH2>
@@ -178,13 +178,13 @@ class OrderID extends Component {
             <StyledH3>
               1. Click orders - start with step 2 and remove step 1.
             </StyledH3>
-            <StepImage src="/static/images/order-id-step-1.png" />
+            <StepImage src="/src/assets/images/order-id-step-1.png" />
             <StyledH3>
               2. Navigate to the appropriate order, click order details.
             </StyledH3>
-            <StepImage src="/static/images/order-id-step-2.png" />
+            <StepImage src="/src/assets/images/order-id-step-2.png" />
             <StyledH3>3. Find the order ID. </StyledH3>
-            <StepImage src="/static/images/order-id-step-3.png" />
+            <StepImage src="/src/assets/images/order-id-step-3.png" />
           </ContentContainer>
         </GreyBackground>
       </Fragment>

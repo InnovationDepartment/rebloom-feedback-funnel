@@ -2,14 +2,14 @@ import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Formik } from 'formik'
-import { media } from '../static/utils/style-utils'
+import { media } from '../src/utils/style-utils'
 
-import Head from '../components/head'
-import { PrimaryButton } from '../components/buttons'
-import { Container } from '../components/container'
-import { TextInput } from '../components/inputs'
-import { H2, P } from '../components/text'
-import { TermsAndConditions } from '../components/TandC'
+import Head from '../src/components/head'
+import { PrimaryButton } from '../src/components/buttons'
+import { Container } from '../src/components/container'
+import { TextInput } from '../src/components/inputs'
+import { H2, P } from '../src/components/text'
+import { TermsAndConditions } from '../src/components/TandC'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -53,7 +53,7 @@ class SignUp extends Component {
         <Head title="reBloom" />
         <Container>
           <TextContainer>
-            <LogoImage src="/static/images/logo-white.png" />
+            <LogoImage src="/src/assets/images/logo-white.png" />
             <StyledH2>
               We want to hear from you! Tell us about your experience for a free
               7-pack.{' '}

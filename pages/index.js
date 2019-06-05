@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { media } from '../static/utils/style-utils'
+import { media } from '../src/utils/style-utils'
 
-import Head from '../components/head'
-import { Container } from '../components/container'
-import { PrimaryButton } from '../components/buttons'
-import { H1, H3, P } from '../components/text'
-import { TermsAndConditions } from '../components/TandC'
+import Head from '../src/components/head'
+import { Container } from '../src/components/container'
+import { PrimaryButton } from '../src/components/buttons'
+import { H1, H3, P } from '../src/components/text'
+import { TermsAndConditions } from '../src/components/TandC'
 
 const BottleImage = styled.img`
   height: 525px;
@@ -29,7 +29,7 @@ const LandingPage = () => (
   <Fragment>
     <Head title="reBloom" />
     <Container>
-      <BottleImage src="/static/images/bottle.png" />
+      <BottleImage src="/src/assets/images/bottle.png" />
       <TextContainer>
         <H1>Free 7-Pack of reBloom</H1>
         <H3>Seriously, no strings attached.</H3>

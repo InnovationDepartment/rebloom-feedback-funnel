@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 
 const BackgroundContainer = styled.div`
-  background-image: url('/static/images/background.jpg');
+  background-image: url('/src/assets/images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;

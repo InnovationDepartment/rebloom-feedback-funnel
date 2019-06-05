@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { media } from '../static/utils/style-utils'
-import { Container } from '../components/container'
-import { H1, H3 } from '../components/text'
-import Head from '../components/head'
+import { media } from '../src/utils/style-utils'
+import { Container } from '../src/components/container'
+import { H1, H3 } from '../src/components/text'
+import Head from '../src/components/head'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -47,8 +47,8 @@ const LandingPage = () => (
   <Fragment>
     <Head title="reBloom" />
     <Container>
-      <LogoImage src="/static/images/logo-white.png" />
-      <BottleImage src="/static/images/bottle.png" />
+      <LogoImage src="/src/assets/images/logo-white.png" />
+      <BottleImage src="/src/assets/images/bottle.png" />
       <TextContainer>
         <StyledH1>Success!</StyledH1>
         <StyledH3>We told you it would be easy.</StyledH3>

@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { media } from '../static/utils/style-utils'
-import { PrimaryButton } from '../components/buttons'
-import { H1, H2, H4 } from '../components/text'
-import { Container } from '../components/container'
-import { TermsAndConditions } from '../components/TandC'
-import Head from '../components/head'
+import { media } from '../src/utils/style-utils'
+import { PrimaryButton } from '../src/components/buttons'
+import { H1, H2, H4 } from '../src/components/text'
+import { Container } from '../src/components/container'
+import { TermsAndConditions } from '../src/components/TandC'
+import Head from '../src/components/head'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -66,7 +66,7 @@ class Error extends Component {
         <Head title="reBloom" />
         <Container>
           <TextContainer>
-            <LogoImage src="/static/images/logo-white.png" />
+            <LogoImage src="/src/assets/images/logo-white.png" />
             <H1>{header}</H1>
             <StyledH2>{subheader}</StyledH2>
             {body1 && <StyledH4>{body1}</StyledH4>}

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { P } from '../components/text'
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 
 const TermsLinksContainer = styled.div`
   display: flex;
