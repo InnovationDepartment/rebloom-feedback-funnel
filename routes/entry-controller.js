@@ -11,19 +11,44 @@ const { Entries } = require('../db/models')
 router.post(
   '/new-entry',
   asyncWrapper(async (req, res) => {
-    const { firstName, lastName, email } = req.body
+    const { first_name, last_name, email } = req.body
     const lowerCaseEmail = email.toLowerCase()
 
     const [entry, isNew] = await Entries.findOrCreateEntry({
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       email: lowerCaseEmail,
     })
-    
+
     // Entry already exists with this email and has already been redeemed
     if (!isNew && entry.has_redeemed) throw new createError('existing-entry')
 
     res.status(200).send(entry)
+  })
+)
+
+router.post(
+  '/update-entry',
+  asyncWrapper(async (req, res) => {
+    const {
+      entryIdentifiers: { id, email },
+      entryInfo: { order_id },
+    } = req.body
+
+    const lowerCaseEmail = email.toLowerCase()
+    const entry = await Entries.findOne({
+      where: {
+        id: { [Op.eq]: id },
+        email: { [Op.eq]: email },
+      },
+    })
+
+    // Entry already exists with this email and has already been redeemed
+    if (entry.has_redeemed) throw new createError('existing-entry')
+
+    const updatedEntry = await entry.updateEntry({ order_id })
+
+    res.status(200).send(updatedEntry)
   })
 )
 

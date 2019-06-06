@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 import Link from 'next/link'
+import Router from 'next/Router'
 import styled from 'styled-components'
 import { Formik } from 'formik'
 
@@ -7,7 +9,9 @@ import { media } from '../static/utils/style-utils'
 import Head from '../static/components/head'
 import { PrimaryButton } from '../static/components/buttons'
 import { TextInput } from '../static/components/inputs'
-import { H2, H3, H4, P } from '../static/components/text'
+import { H2, H3, H4, P, ErrorP } from '../static/components/text'
+
+import { clearErrors, updateEntry } from '../static/actions/entries'
 
 const TopImageBackground = styled.div`
   background-image: url('static/assets/images/background.jpg');
@@ -96,12 +100,16 @@ const StepImage = styled.img`
   margin-bottom: 80px;
 `
 
-const StyledLink = styled.a`
-  color: #fff;
+const StyledLink = styled.span`
+  cursor: pointer;
+  text-decoration: underline;
 `
 
 class OrderID extends Component {
   render() {
+    const { loading, entry, error } = this.props
+    if (loading) return <Spinner />
+
     return (
       <Fragment>
         <Head title="reBloom" />
@@ -109,19 +117,29 @@ class OrderID extends Component {
           <ContentContainer>
             <TextContainer>
               <LogoImage src="static/assets/images/logo-white.png" />
-              <StyledH2>Please find your Amazon Order ID from your reBloom purchase.</StyledH2>
+              <StyledH2>
+                Please find your Amazon Order ID from your reBloom purchase.
+              </StyledH2>
               <StyledH4Italic>
-                Enter your Order ID with all of the dashes. Need help? See below.
+                Enter your Order ID with all of the dashes. Need help? See
+                below.
               </StyledH4Italic>
               <Formik
-                initialValues={{}}
+                initialValues={{
+                  order_id: entry.order_id || '',
+                }}
                 validate={values => {
                   let errors = {}
-                  if (!values.orderID) errors.orderID = 'Required field'
+                  if (!values.order_id) errors.order_id = 'Required field'
                   return errors
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                  console.log('IM SUBMITTING!') // TODO: Update
+                  const {
+                    updateEntry,
+                    entry: { id, email },
+                  } = this.props
+
+                  updateEntry({ id, email }, values, 'usage')
                   setSubmitting(false)
                 }}
               >
@@ -138,19 +156,22 @@ class OrderID extends Component {
                     <div>
                       <TextInput
                         type="text"
-                        name="orderID"
-                        error={touched.orderID && errors.orderID}
+                        name="order_id"
+                        error={touched.order_id && errors.order_id}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.orderID}
+                        value={values.order_id}
                         placeholder="###-#######-#######"
                       />
                       <StyledErrorP>
-                        {(errors.orderID && touched.orderID && errors.orderID) || ' '}
+                        {(errors.order_id &&
+                          touched.order_id &&
+                          errors.order_id) ||
+                          ' '}
                       </StyledErrorP>
                     </div>
-
                     <ButtonContainer>
+                      <ErrorP>{(error && error) || ' '}</ErrorP>
                       <PrimaryButton type="submit" disabled={isSubmitting}>
                         NEXT
                       </PrimaryButton>
@@ -160,7 +181,9 @@ class OrderID extends Component {
               </Formik>
               <StyledH4>
                 Not an Amazon customer?{'  '}
-                <StyledLink href="/error">Continue here.</StyledLink>
+                <StyledLink onClick={() => Router.push('/error?type=invalid')}>
+                  Continue here.
+                </StyledLink>
               </StyledH4>
             </TextContainer>
           </ContentContainer>
@@ -168,12 +191,16 @@ class OrderID extends Component {
         <GreyBackground>
           <ContentContainer>
             <TitleH2>How to find your Order ID:</TitleH2>
-            <StyledH3>1. Click orders - start with step 2 and remove step 1.</StyledH3>
-            <StepImage src="/src/assets/images/order-id-step-1.png" />
-            <StyledH3>2. Navigate to the appropriate order, click order details.</StyledH3>
-            <StepImage src="/src/assets/images/order-id-step-2.png" />
+            <StyledH3>
+              1. Click orders - start with step 2 and remove step 1.
+            </StyledH3>
+            <StepImage src="static/assets/images/order-id-step-1.png" />
+            <StyledH3>
+              2. Navigate to the appropriate order, click order details.
+            </StyledH3>
+            <StepImage src="static/assets/images/order-id-step-2.png" />
             <StyledH3>3. Find the order ID. </StyledH3>
-            <StepImage src="/src/assets/images/order-id-step-3.png" />
+            <StepImage src="static/assets/images/order-id-step-3.png" />
           </ContentContainer>
         </GreyBackground>
       </Fragment>
@@ -181,4 +208,18 @@ class OrderID extends Component {
   }
 }
 
-export default OrderID
+const mapState = ({ entries }) => ({
+  loading: entries.loading,
+  entry: entries.entry,
+  error: entries.error,
+})
+
+const mapDispatch = {
+  clearErrors,
+  updateEntry,
+}
+
+export default connect(
+  mapState,
+  mapDispatch
+)(OrderID)

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 import { media } from '../static/utils/style-utils'
 import Head from '../static/components/head'
+import Spinner from '../static/components/Spinner'
 import Container from '../static/components/container'
 import TermsAndConditions from '../static/components/TandC'
 import { PrimaryButton } from '../static/components/buttons'
@@ -51,12 +52,14 @@ const StyledErrorP = styled(P)`
 `
 
 class SignUp extends Component {
-  componentDidMount() {
+  componentWillUnmount() {
     this.props.clearErrors()
   }
 
   render() {
-    const { error } = this.props
+    const { loading, entry, error } = this.props
+    if (loading) return <Spinner />
+    
     return (
       <Fragment>
         <Head title="reBloom - Bonus Offer Sign Up" />
@@ -64,15 +67,20 @@ class SignUp extends Component {
           <TextContainer>
             <LogoImage src="static/assets/images/logo-white.png" />
             <StyledH2>
-              We want to hear from you! Tell us about your experience for a free 7-pack.
+              We want to hear from you! Tell us about your experience for a free
+              7-pack.
             </StyledH2>
             <Formik
-              initialValues={{ firstName: '', lastName: '', email: '' }}
+              initialValues={{
+                first_name: entry.first_name || '',
+                last_name: entry.last_name || '',
+                email: entry.email || '',
+              }}
               validate={values => {
-                const { firstName, lastName, email } = values
+                const { first_name, last_name, email } = values
                 let errors = {}
-                if (!firstName) errors.firstName = 'Required field'
-                if (!lastName) errors.lastName = 'Required field'
+                if (!first_name) errors.first_name = 'Required field'
+                if (!last_name) errors.last_name = 'Required field'
                 if (!email.includes('@') || !email.includes('.')) {
                   errors.email = 'Please enter a valid email address'
                 }
@@ -97,29 +105,35 @@ class SignUp extends Component {
                   <div>
                     <TextInput
                       type="text"
-                      name="firstName"
-                      error={touched.firstName && errors.firstName}
+                      name="first_name"
+                      error={touched.first_name && errors.first_name}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.firstName}
+                      value={values.first_name}
                       placeholder="First Name"
                     />
                     <StyledErrorP>
-                      {(errors.firstName && touched.firstName && errors.firstName) || ' '}
+                      {(errors.first_name &&
+                        touched.first_name &&
+                        errors.first_name) ||
+                        ' '}
                     </StyledErrorP>
                   </div>
                   <div>
                     <TextInput
                       type="text"
-                      name="lastName"
-                      error={touched.lastName && errors.lastName}
+                      name="last_name"
+                      error={touched.last_name && errors.last_name}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.lastName}
+                      value={values.last_name}
                       placeholder="Last Name"
                     />
                     <StyledErrorP>
-                      {(errors.lastName && touched.lastName && errors.lastName) || ' '}
+                      {(errors.last_name &&
+                        touched.last_name &&
+                        errors.last_name) ||
+                        ' '}
                     </StyledErrorP>
                   </div>
                   <div>
@@ -137,7 +151,7 @@ class SignUp extends Component {
                     </StyledErrorP>
                   </div>
                   <ButtonContainer>
-                    <ErrorP>{error && error || ' '}</ErrorP>
+                    <ErrorP>{(error && error) || ' '}</ErrorP>
                     <PrimaryButton type="submit" disabled={isSubmitting}>
                       NEXT
                     </PrimaryButton>
@@ -153,8 +167,10 @@ class SignUp extends Component {
   }
 }
 
-const mapState = ({ entries: { error } }) => ({
-  error,
+const mapState = ({ entries }) => ({
+  loading: entries.loading,
+  entry: entries.entry,
+  error: entries.error,
 })
 
 const mapDispatch = {

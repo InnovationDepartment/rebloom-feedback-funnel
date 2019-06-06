@@ -4,12 +4,12 @@ import Head from '../static/components/head'
 
 const ContentContainer = styled.div`
   height: 100%;
-  max-width: 1200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto 80px auto;
+  padding: 0 5%;
 `
 
 const LogoImage = styled.img`
@@ -24,7 +24,6 @@ const MainTitle = styled.h1`
   color: ${props => props.theme.colors.purple};
   font-size: 64px;
   margin: 0 0 48px 0;
-  text-align: center;
 `
 
 const Paragraph = styled.p`
@@ -33,6 +32,7 @@ const Paragraph = styled.p`
   margin: 0 0 20px 0;
   text-align: center;
   font-size: 14px;
+  text-align: justify;
 `
 
 const BoldCopy = styled.span`
@@ -107,8 +107,8 @@ const TermsAndConditions = () => (
         in the content of the Website.
       </Paragraph>
       <Paragraph>
-        <BoldCopy>Submissions to this Website.</BoldCopy> Although Innovative Brands
-        LLC may from time to time monitor or review discussions, chats,
+        <BoldCopy>Submissions to this Website.</BoldCopy> Although Innovative
+        Brands LLC may from time to time monitor or review discussions, chats,
         postings, transmissions, bulletin boards, and the like on the Website
         (“Postings”), Innovative Brands LLC is under no obligation to do so and
         assumes no responsibility or liability arising from the content of any
@@ -128,29 +128,30 @@ const TermsAndConditions = () => (
         Brands LLC may remove Postings at any time, and for any reason.
       </Paragraph>
       <Paragraph>
-        <BoldCopy>Third Party Links.</BoldCopy> From time to time, this Website may
-        contain links to web sites that are not owned, operated or controlled by
-        Innovative Brands LLC or its respective affiliates. All such links are
-        provided solely as a convenience to you. If you use these links, you
-        will leave this Website. Neither Innovative Brands LLC nor any of its
-        affiliates are responsible for any content, materials or other
-        information located on or accessible from any other web site. Neither
-        Innovative Brands LLC nor any of its affiliates endorse, guarantee, or
-        make any representations or warranties regarding any other web sites, or
-        any content, materials or other information located or accessible from
-        any other web sites, or the results that you may obtain from using any
-        other web sites. If you decide to access any other web sites linked to
-        or from this Website, you do so entirely at your own risk.
+        <BoldCopy>Third Party Links.</BoldCopy> From time to time, this Website
+        may contain links to web sites that are not owned, operated or
+        controlled by Innovative Brands LLC or its respective affiliates. All
+        such links are provided solely as a convenience to you. If you use these
+        links, you will leave this Website. Neither Innovative Brands LLC nor
+        any of its affiliates are responsible for any content, materials or
+        other information located on or accessible from any other web site.
+        Neither Innovative Brands LLC nor any of its affiliates endorse,
+        guarantee, or make any representations or warranties regarding any other
+        web sites, or any content, materials or other information located or
+        accessible from any other web sites, or the results that you may obtain
+        from using any other web sites. If you decide to access any other web
+        sites linked to or from this Website, you do so entirely at your own
+        risk.
       </Paragraph>
       <Paragraph>
-        <BoldCopy>User Information.</BoldCopy> Other than personally identifiable
-        information, which is subject to this Website's Privacy Policy, any
-        material, information, suggestions, ideas, concepts, know-how,
-        techniques, questions, comments or other communication you transmit or
-        post to this Website in any manner ("User Communications") is and will
-        be considered non-confidential and non-proprietary. We and our
-        respective affiliates and our or their designees may use any or all User
-        Communications for any purpose whatsoever, including, without
+        <BoldCopy>User Information.</BoldCopy> Other than personally
+        identifiable information, which is subject to this Website's Privacy
+        Policy, any material, information, suggestions, ideas, concepts,
+        know-how, techniques, questions, comments or other communication you
+        transmit or post to this Website in any manner ("User Communications")
+        is and will be considered non-confidential and non-proprietary. We and
+        our respective affiliates and our or their designees may use any or all
+        User Communications for any purpose whatsoever, including, without
         limitation, reproduction, transmission, disclosure, publication,
         broadcast, development, manufacturing and/or marketing in any manner
         whatsoever for any or all commercial or non-commercial purposes. We may,
@@ -163,14 +164,14 @@ const TermsAndConditions = () => (
         deem inappropriate or unacceptable.
       </Paragraph>
       <Paragraph>
-        <BoldCopy>Health Related Information.</BoldCopy> Information presented on
-        this Website is intended to impart general fitness, nutrition and health
-        information. Innovative Brands LLC is not engaged in rendering medical
-        advice or services. The information presented on this Website is not
-        intended for diagnostic or treatment purposes. You should consult your
-        doctor for medical advice or services. Consultation with your doctor is
-        particularly important if you are under eighteen (18) years old,
-        pregnant, breastfeeding, or have health problems. Never disregard
+        <BoldCopy>Health Related Information.</BoldCopy> Information presented
+        on this Website is intended to impart general fitness, nutrition and
+        health information. Innovative Brands LLC is not engaged in rendering
+        medical advice or services. The information presented on this Website is
+        not intended for diagnostic or treatment purposes. You should consult
+        your doctor for medical advice or services. Consultation with your
+        doctor is particularly important if you are under eighteen (18) years
+        old, pregnant, breastfeeding, or have health problems. Never disregard
         professional medical advice or delay in seeking it because of something
         you have read on this Website. Information and statements regarding
         dietary supplements have not been evaluated by the Food and Drug
@@ -232,10 +233,10 @@ const TermsAndConditions = () => (
         appropriate or available for use in locations outside the United States.
       </Paragraph>
       <Paragraph>
-        <BoldCopy>Limitations of Liability.</BoldCopy> Your use of and browsing of
-        this Website are at your own risk. Neither Innovative Brands LLC nor any
-        other party involved in creating, producing or delivering this Website
-        is liable for any direct, incidental, consequential, indirect or
+        <BoldCopy>Limitations of Liability.</BoldCopy> Your use of and browsing
+        of this Website are at your own risk. Neither Innovative Brands LLC nor
+        any other party involved in creating, producing or delivering this
+        Website is liable for any direct, incidental, consequential, indirect or
         punitive damages arising out of your access to, or use of, this Website.
         Without limiting the foregoing, everything on this Website is provided
         to you "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
@@ -248,14 +249,14 @@ const TermsAndConditions = () => (
         equipment or other property on account your use of this Website.
       </Paragraph>
       <Paragraph>
-        <BoldCopy>General.</BoldCopy> Our failure to exercise or enforce any right
-        or provision of these Terms and Conditions shall not constitute a waiver
-        of such right or provision by us. If any provision of these Terms and
-        Conditions is found by a court of competent jurisdiction to be invalid,
-        the parties nevertheless agree that the court should endeavor to give
-        effect to the parties' intentions as reflected in the provision, and the
-        other provisions of our Terms and Conditions remain in full force and
-        effect.
+        <BoldCopy>General.</BoldCopy> Our failure to exercise or enforce any
+        right or provision of these Terms and Conditions shall not constitute a
+        waiver of such right or provision by us. If any provision of these Terms
+        and Conditions is found by a court of competent jurisdiction to be
+        invalid, the parties nevertheless agree that the court should endeavor
+        to give effect to the parties' intentions as reflected in the provision,
+        and the other provisions of our Terms and Conditions remain in full
+        force and effect.
       </Paragraph>
       <Paragraph>
         <BoldCopy>Revisions to these Terms and Conditions.</BoldCopy> Innovative

@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
+import Router, { withRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { media } from '../static/utils/style-utils'
-import Head from '../static/components/head'
-import Container from '../static/components/container'
+import Head from '../static/components/Head'
+import Container from '../static/components/Container'
 import TermsAndConditions from '../static/components/TandC'
 import { PrimaryButton } from '../static/components/buttons'
 import { H1, H2, H4 } from '../static/components/text'
@@ -33,7 +34,7 @@ const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   color: #fff;
-  height: 100%;
+  height: 100% !important;
   margin: 0 auto;
 `
 
@@ -43,53 +44,88 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `
 
-const EmailLink = styled.a`
+const StyledLink = styled.a`
   color: #fff;
   margin: 0;
   cursor: pointer;
   margin: 0 6px;
+  text-decoration: none;
 `
+
+const UnderlinedLink = styled(StyledLink)`
+  text-decoration: underline;
+`
+
+const errorMap = {
+  'existing-entry': {
+    header: 'Oops!',
+    subheader:
+      'It seems like you’ve already redeemed  your free 7-bottle pack.',
+    body1: 'This offer is only available one time per household.',
+  },
+  invalid: {
+    header: 'Oops!',
+    subheader:
+      'Unfortunately, you don’t qualify for this offer. In the meantime, get 25% off your next  reBloom order.',
+    buttonCopy: 'GET 25% OFF',
+    buttonDest: 'http://www.google.com',
+    contactInfo: true,
+  },
+  default: {
+    header: 'Oops!',
+    subheader: 'Something went wrong.',
+    body1: 'Plase try again.',
+  },
+}
 
 class Error extends Component {
   render() {
+    const { router } = this.props
+
+    const errorKey = (router && router.query && router.query.type) || 'default'
     const {
-      header = 'Oops!',
-      subheader = 'It looks like there was a problem.',
+      header,
+      subheader,
       buttonCopy,
       buttonDest,
-      body1 = 'Please try again.',
+      body1,
       body2,
       contactInfo,
-    } = this.props
+    } = errorMap[errorKey]
 
     return (
-      <Fragment>
+      <div>
         <Head title="reBloom" />
         <Container>
           <TextContainer>
-            <LogoImage src="/src/assets/images/logo-white.png" />
+            <LogoImage src="/static/assets/images/logo-white.png" />
             <H1>{header}</H1>
             <StyledH2>{subheader}</StyledH2>
             {body1 && <StyledH4>{body1}</StyledH4>}
             {body2 && <StyledH4>{body2}</StyledH4>}
             {buttonCopy && (
               <ButtonContainer>
-                <PrimaryButton>{buttonCopy}</PrimaryButton>
+                <StyledLink href={buttonDest}>
+                  <PrimaryButton>{buttonCopy}</PrimaryButton>
+                </StyledLink>
               </ButtonContainer>
             )}
             {contactInfo && (
               <StyledH4>
-                If you think this was an error, please write to our support team at
-                <EmailLink href="mailto:help@rebloom.com">help@rebloom.com</EmailLink>
+                If you think this was an error, please write to our support team
+                at
+                <UnderlinedLink href="mailto:help@rebloom.com">
+                  help@rebloom.com
+                </UnderlinedLink>
                 and we’ll be sure to take care of you.
               </StyledH4>
             )}
             <TermsAndConditions />
           </TextContainer>
         </Container>
-      </Fragment>
+      </div>
     )
   }
 }
 
-export default Error
+export default withRouter(Error)

@@ -1,5 +1,5 @@
 module.exports = {
-  printWidth: 100, // 80
+  printWidth: 80, // 80
   tabWidth: 2, // 2
   useTabs: false, // false
   semi: false, // true
@@ -10,7 +10,7 @@ module.exports = {
     {
       files: '*src/app.js',
       options: {
-        printWidth: 120,
+        printWidth: 100,
       },
     },
   ],
