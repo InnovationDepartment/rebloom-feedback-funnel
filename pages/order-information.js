@@ -3,14 +3,14 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { Formik } from 'formik'
 
-import { media } from '../src/utils/style-utils'
-import { PrimaryButton } from '../src/components/buttons'
-import { TextInput } from '../src/components/inputs'
-import { H2, H3, H4, P } from '../src/components/text'
-import Head from '../src/components/head'
+import { media } from '../static/utils/style-utils'
+import Head from '../static/components/head'
+import { PrimaryButton } from '../static/components/buttons'
+import { TextInput } from '../static/components/inputs'
+import { H2, H3, H4, P } from '../static/components/text'
 
 const TopImageBackground = styled.div`
-  background-image: url('/src/assets/images/background.jpg');
+  background-image: url('static/assets/images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
@@ -108,18 +108,13 @@ class OrderID extends Component {
         <TopImageBackground>
           <ContentContainer>
             <TextContainer>
-              <LogoImage src="/src/assets/images/logo-white.png" />
-              <StyledH2>
-                Please find your Amazon Order ID from your reBloom purchase.
-              </StyledH2>
+              <LogoImage src="static/assets/images/logo-white.png" />
+              <StyledH2>Please find your Amazon Order ID from your reBloom purchase.</StyledH2>
               <StyledH4Italic>
-                Enter your Order ID with all of the dashes. Need help? See
-                below.
+                Enter your Order ID with all of the dashes. Need help? See below.
               </StyledH4Italic>
               <Formik
-                initialValues={{
-                  orderID: '',
-                }}
+                initialValues={{}}
                 validate={values => {
                   let errors = {}
                   if (!values.orderID) errors.orderID = 'Required field'
@@ -128,7 +123,8 @@ class OrderID extends Component {
                 onSubmit={(values, { setSubmitting }) => {
                   console.log('IM SUBMITTING!') // TODO: Update
                   setSubmitting(false)
-                }}>
+                }}
+              >
                 {({
                   values,
                   errors,
@@ -150,10 +146,7 @@ class OrderID extends Component {
                         placeholder="###-#######-#######"
                       />
                       <StyledErrorP>
-                        {(errors.orderID &&
-                          touched.orderID &&
-                          errors.orderID) ||
-                          ' '}
+                        {(errors.orderID && touched.orderID && errors.orderID) || ' '}
                       </StyledErrorP>
                     </div>
 
@@ -175,13 +168,9 @@ class OrderID extends Component {
         <GreyBackground>
           <ContentContainer>
             <TitleH2>How to find your Order ID:</TitleH2>
-            <StyledH3>
-              1. Click orders - start with step 2 and remove step 1.
-            </StyledH3>
+            <StyledH3>1. Click orders - start with step 2 and remove step 1.</StyledH3>
             <StepImage src="/src/assets/images/order-id-step-1.png" />
-            <StyledH3>
-              2. Navigate to the appropriate order, click order details.
-            </StyledH3>
+            <StyledH3>2. Navigate to the appropriate order, click order details.</StyledH3>
             <StepImage src="/src/assets/images/order-id-step-2.png" />
             <StyledH3>3. Find the order ID. </StyledH3>
             <StepImage src="/src/assets/images/order-id-step-3.png" />
@@ -192,4 +181,4 @@ class OrderID extends Component {
   }
 }
 
-export default OrderID 
+export default OrderID

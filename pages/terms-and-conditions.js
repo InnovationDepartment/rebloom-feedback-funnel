@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Head from '../src/components/head'
+import Head from '../static/components/head'
 
 const ContentContainer = styled.div`
   height: 100%;
@@ -51,7 +51,7 @@ const TermsAndConditions = () => (
   <div>
     <Head title="reBloom - Terms & Conditions" />
     <ContentContainer>
-      <LogoImage src="/src/assets/images/logo-purple.png" alt="logo" />
+      <LogoImage src="static/assets/images/logo-purple.png" alt="logo" />
       <MainTitle>Terms and Conditions</MainTitle>
       <Paragraph>
         Thank you for visiting reBloom’s website. Innovative Brands LLC

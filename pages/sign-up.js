@@ -2,14 +2,16 @@ import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Formik } from 'formik'
-import { media } from '../src/utils/style-utils'
+import { media } from '../static/utils/style-utils'
 
-import Head from '../src/components/head'
-import { PrimaryButton } from '../src/components/buttons'
-import { Container } from '../src/components/container'
-import { TextInput } from '../src/components/inputs'
-import { H2, P } from '../src/components/text'
-import { TermsAndConditions } from '../src/components/TandC'
+import Head from '../static/components/head'
+import Container from '../static/components/container'
+import TermsAndConditions from '../static/components/TandC'
+import { PrimaryButton } from '../static/components/buttons'
+import { TextInput } from '../static/components/inputs'
+import { H2, P } from '../static/components/text'
+
+import { createNewEntry } from '../static/actions/entries'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -50,37 +52,31 @@ class SignUp extends Component {
   render() {
     return (
       <Fragment>
-        <Head title="reBloom" />
+        <Head title="reBloom - Bonus Offer Sign Up" />
         <Container>
           <TextContainer>
-            <LogoImage src="/src/assets/images/logo-white.png" />
+            <LogoImage src="static/assets/images/logo-white.png" />
             <StyledH2>
-              We want to hear from you! Tell us about your experience for a free
-              7-pack.{' '}
+              We want to hear from you! Tell us about your experience for a free 7-pack.
             </StyledH2>
             <Formik
-              initialValues={{
-                firstName: '',
-                lastName: '',
-                email: '',
-              }}
+              initialValues={{}}
               validate={values => {
+                const { firstName, lastName, email } = values
                 let errors = {}
-                if (!values.firstName) errors.firstName = 'Required field'
-                if (!values.lastName) errors.lastName = 'Required field'
-                if (
-                  !values.email.includes('@') ||
-                  !values.email.includes('.')
-                ) {
+                if (!firstName) errors.firstName = 'Required field'
+                if (!lastName) errors.lastName = 'Required field'
+                if (!email.includes('@') || !email.includes('.')) {
                   errors.email = 'Please enter a valid email address'
                 }
-                if (!values.email) errors.email = 'Required field'
+                if (!email) errors.email = 'Required field'
                 return errors
               }}
               onSubmit={(values, { setSubmitting }) => {
                 console.log('IM SUBMITTING!', values) // TODO: Update
                 setSubmitting(false)
-              }}>
+              }}
+            >
               {({
                 values,
                 errors,
@@ -102,10 +98,7 @@ class SignUp extends Component {
                       placeholder="First Name"
                     />
                     <StyledErrorP>
-                      {(errors.firstName &&
-                        touched.firstName &&
-                        errors.firstName) ||
-                        ' '}
+                      {(errors.firstName && touched.firstName && errors.firstName) || ' '}
                     </StyledErrorP>
                   </div>
                   <div>
@@ -119,10 +112,7 @@ class SignUp extends Component {
                       placeholder="Last Name"
                     />
                     <StyledErrorP>
-                      {(errors.lastName &&
-                        touched.lastName &&
-                        errors.lastName) ||
-                        ' '}
+                      {(errors.lastName && touched.lastName && errors.lastName) || ' '}
                     </StyledErrorP>
                   </div>
                   <div>

@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { media } from '../src/utils/style-utils'
 
-import Head from '../src/components/head'
-import { Container } from '../src/components/container'
-import { PrimaryButton } from '../src/components/buttons'
-import { H1, H3, P } from '../src/components/text'
-import { TermsAndConditions } from '../src/components/TandC'
+import { media } from '../static/utils/style-utils'
+import Head from '../static/components/head'
+import Container from '../static/components/container'
+import TermsAndConditions from '../static/components/TandC'
+import { PrimaryButton } from '../static/components/buttons'
+import { H1, H3, P } from '../static/components/text'
 
 const BottleImage = styled.img`
   height: 525px;
@@ -25,11 +25,26 @@ const TextContainer = styled.div`
   max-width: 700px;
 `
 
+const TermsLinksContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+  font-size: 22px;
+  margin-top: 20px;
+`
+
+const TermsLinks = styled(P)`
+  text-decoration: none !important;
+  color: #fff;
+  margin: 0;
+  cursor: pointer;
+`
+
 const LandingPage = () => (
   <Fragment>
     <Head title="reBloom" />
     <Container>
-      <BottleImage src="/src/assets/images/bottle.png" />
+      <BottleImage src="static/assets/images/bottle.png" />
       <TextContainer>
         <H1>Free 7-Pack of reBloom</H1>
         <H3>Seriously, no strings attached.</H3>
@@ -43,7 +58,15 @@ const LandingPage = () => (
             of purchase. Order must have been purchased with no discount code
             greater than 30%. Valid in the US only. Limit one per household.
           </P>
-          <TermsAndConditions />
+          <TermsLinksContainer>
+            <Link href="/terms-and-conditions">
+              <TermsLinks>Terms and Conditions </TermsLinks>
+            </Link>
+            {'  '}|{'  '}
+            <Link href="/privacy-policy">
+              <TermsLinks>Privacy Policy </TermsLinks>
+            </Link>
+          </TermsLinksContainer>
         </div>
       </TextContainer>
     </Container>

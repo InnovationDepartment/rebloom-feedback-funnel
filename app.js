@@ -2,16 +2,16 @@
 require('dotenv').config()
 
 const next = require('next')
-const history = require('connect-history-api-fallback')
-const createError = require('http-errors')
 const express = require('express')
+const session = require('express-session')
+const createError = require('http-errors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
-const session = require('express-session')
 const passport = require('passport')
 const RedisStore = require('connect-redis')(session)
 
+const models = require('./db/models')
 const redisClient = require('./db/redis')
 const indexRouter = require('./routes/index')
 const { getEnvPrefix } = require('./util/environment')
@@ -19,19 +19,15 @@ const { getEnvPrefix } = require('./util/environment')
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
-
-const app = express()
 const port = normalizePort(process.env.PORT || '3000')
 
 nextApp.prepare().then(() => {
+  const app = express()
+
   app.set('port', port)
 
-  // view engine setup
-  app.set('views', path.join(__dirname, 'views'))
-  app.set('view engine', 'ejs')
-
+  // Logging
   const sensitiveKeys = []
-
   morgan.token('body', function(req) {
     let cleanedBody = Object.assign({}, req.body)
     sensitiveKeys.forEach(key => delete cleanedBody[key])
@@ -42,44 +38,16 @@ nextApp.prepare().then(() => {
     return stringifiedBody
   })
 
-  const logFormat =
-    process.env.NODE_ENV === 'development'
-      ? 'dev'
-      : ':status :method :url :body :response-time ms'
+  const logFormat = dev ? 'dev' : ':status :method :url :body :response-time ms'
   app.use(morgan(logFormat))
 
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
 
-  // All *.js routes except for /admin will be appended with .gz to get compressed file
-  app.get(/^\/(?!admin).*\.js\/?$/, function(req, res, next) {
-    req.url = req.url + '.gz'
-    res.set('Content-Encoding', 'gzip')
-    res.set('Content-Type', 'text/javascript')
-    next()
-  })
+  app.get('*', (req, res) => handle(req, res))
 
-  app.use(express.static(path.join(__dirname, 'public')))
-
-  app.use(
-    history({
-      rewrites: [
-        {
-          from: /^\/api\/\w+/,
-          to: context => context.parsedUrl.pathname,
-        },
-        {
-          from: /^\/admin/,
-          to: context => context.parsedUrl.pathname,
-        },
-        {
-          from: /^\/admin\/queue\/?/,
-          to: context => context.parsedUrl.pathname,
-        },
-      ],
-    })
-  )
+  // app.use(express.static(path.join(__dirname, 'public')))
 
   // Redis session middleware with passport
   app.use(
@@ -102,7 +70,7 @@ nextApp.prepare().then(() => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  app.use(express.static(path.join(__dirname, 'public')))
+  // app.use(express.static(path.join(__dirname, 'public')))
 
   app.use('/api', indexRouter)
 
@@ -130,6 +98,14 @@ nextApp.prepare().then(() => {
     res.status(err.status || 500)
     res.render('error')
   })
+
+  // Creates all tables if they doesn't exist in database
+  models.sequelize.sync().then(() => {
+    app.listen(port, err => {
+      if (err) throw err
+      console.log(`Listening on http://localhost:${port}`)
+    })
+  })
 })
 
 function normalizePort(val) {
@@ -138,5 +114,3 @@ function normalizePort(val) {
   if (port >= 0) return port
   return false
 }
-
-module.exports = { app: nextApp }

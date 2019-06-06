@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { media } from '../src/utils/style-utils'
-import { Container } from '../src/components/container'
-import { H1, H3 } from '../src/components/text'
-import Head from '../src/components/head'
+
+import { media } from '../static/utils/style-utils'
+import Head from '../static/components/head'
+import Container from '../static/components/container'
+import { H1, H3 } from '../static/components/text'
 
 const LogoImage = styled.img`
   height: 40px;

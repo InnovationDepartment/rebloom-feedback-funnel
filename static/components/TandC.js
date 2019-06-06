@@ -21,7 +21,7 @@ const TermsLinks = styled(P)`
   cursor: pointer;
 `
 
-export const TermsAndConditions = () => (
+const TermsAndConditions = () => (
   <TermsLinksContainer>
     <Link href="/terms-and-conditions">
       <TermsLinks>Terms and Conditions </TermsLinks>
@@ -32,3 +32,5 @@ export const TermsAndConditions = () => (
     </Link>
   </TermsLinksContainer>
 )
+
+export default TermsAndConditions

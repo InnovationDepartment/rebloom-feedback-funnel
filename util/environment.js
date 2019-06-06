@@ -5,9 +5,9 @@ const environmentMap = {
 }
 
 const hostnameMap = {
-  development: 'http://localhost:8080',
-  staging: 'http://staging.gowellpath.com',
-  production: 'https://www.gowellpath.com',
+  development: 'http://localhost:3000',
+  // staging: 'http://staging.gowellpath.com',
+  // production: 'https://www.gowellpath.com',
 }
 
 const getEnvPrefix = () => {

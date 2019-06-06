@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { media } from '../src/utils/style-utils'
-import { PrimaryButton } from '../src/components/buttons'
-import { H1, H2, H4 } from '../src/components/text'
-import { Container } from '../src/components/container'
-import { TermsAndConditions } from '../src/components/TandC'
-import Head from '../src/components/head'
+
+import { media } from '../static/utils/style-utils'
+import Head from '../static/components/head'
+import Container from '../static/components/container'
+import TermsAndConditions from '../static/components/TandC'
+import { PrimaryButton } from '../static/components/buttons'
+import { H1, H2, H4 } from '../static/components/text'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -78,11 +79,8 @@ class Error extends Component {
             )}
             {contactInfo && (
               <StyledH4>
-                If you think this was an error, please write to our support team
-                at
-                <EmailLink href="mailto:help@rebloom.com">
-                  help@rebloom.com
-                </EmailLink>
+                If you think this was an error, please write to our support team at
+                <EmailLink href="mailto:help@rebloom.com">help@rebloom.com</EmailLink>
                 and we’ll be sure to take care of you.
               </StyledH4>
             )}

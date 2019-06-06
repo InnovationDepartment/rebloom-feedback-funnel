@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { media } from '../utils/style-utils'
 
 const BackgroundContainer = styled.div`
-  background-image: url('/src/assets/images/background.jpg');
+  background-image: url('static/assets/images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
@@ -23,8 +23,10 @@ const ContentContainer = styled.div`
   margin: 0 auto;
 `
 
-export const Container = props => (
+const Container = props => (
   <BackgroundContainer>
     <ContentContainer>{props.children}</ContentContainer>
   </BackgroundContainer>
 )
+
+export default Container
