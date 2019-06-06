@@ -48,3 +48,18 @@ export const P = styled.p`
   margin-bottom: 22px;
   padding: 0 15px;
 `
+
+
+export const ErrorP = styled.h5`
+  font-family: 'Lato', sans-serif;
+  color: white;
+  margin: 0;
+  text-align: center;
+  ${media.small`
+   font-size: 12px;
+   line-height: 20px;
+  `};
+  ${media.medium`
+   font-size: 16px;
+  `};
+`

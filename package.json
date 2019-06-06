@@ -6,6 +6,7 @@
     "start": "npm run migrate && ./app.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "connect-history-api-fallback": "^1.6.0",
     "connect-redis": "^3.4.1",
     "cookie-parser": "^1.4.4",
@@ -15,7 +16,6 @@
     "express": "^4.17.1",
     "express-session": "^1.16.1",
     "formik": "^1.5.7",
-    "history": "^4.9.0",
     "http": "^0.0.0",
     "http-errors": "^1.7.2",
     "isomorphic-unfetch": "^3.0.0",
@@ -27,7 +27,13 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.1",
     "redis": "^2.8.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^6.1.0",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^5.8.7",
     "styled-components": "^4.2.0",
     "util": "^0.12.0"
@@ -37,6 +43,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-plugin-styled-components": "^1.10.0",

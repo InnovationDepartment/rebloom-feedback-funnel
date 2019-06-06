@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { media } from '../utils/style-utils'
 
 export const PrimaryButton = styled.button`
-  background-color: #5fd0ff;
+  background-color: ${props => props.theme.colors.babyBlue};
   text-decoration: none;
   text-align: center;
   display: flex;
@@ -11,8 +11,8 @@ export const PrimaryButton = styled.button`
   cursor: pointer;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  color: #fff;
-  border: 1px solid #979797;
+  color: white;
+  border: 1px solid ${props => props.theme.colors.lightGray};
   ${media.small`
     border-radius: 25px;
     font-size: 26px;
@@ -24,6 +24,6 @@ export const PrimaryButton = styled.button`
     border-radius: 25px;
     font-size: 30px;
     width: 450px;
-    margin: 40px 0;
+    margin: 20px 0;
   `}
 `

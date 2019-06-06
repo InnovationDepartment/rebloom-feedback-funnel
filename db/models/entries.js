@@ -1,4 +1,5 @@
 'use strict'
+const { Op } = require('sequelize')
 const createError = require('http-errors')
 
 module.exports = (sequelize, DataTypes) => {
@@ -47,16 +48,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
-  Entries.createNew = async entryData => {
+  Entries.findOrCreateEntry = async entryData => {
     try {
-      return await Entries.create(entryData)
+      return await Entries.findOrCreate({
+        where: {
+          email: { [Op.eq]: entryData.email },
+        },
+        defaults: entryData,
+      })
     } catch (e) {
-      if (e.name === 'SequelizeUniqueConstraintError') {
-        throw new createError(400, 'existing-entry')
-      }
-      throw new Error(
-        'Uh oh, we had an issue signing you up. Please try again.'
-      )
+      throw new Error('Uh oh, we had an issue signing you up. Please try again.')
     }
   }
 
@@ -64,9 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     try {
       return await this.update(entryData)
     } catch (e) {
-      throw new Error(
-        'Uh oh, we had an issue updating your information. Please try again.'
-      )
+      throw new Error('Uh oh, we had an issue updating your information. Please try again.')
     }
   }
 

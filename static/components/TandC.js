@@ -9,9 +9,7 @@ const TermsLinksContainer = styled.div`
   justify-content: space-between;
   width: fit-content;
   font-size: 22px;
-  margin-top: 62px;
-  position: absolute;
-  bottom: 50px;
+  margin-top: 50px;
 `
 
 const TermsLinks = styled(P)`

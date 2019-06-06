@@ -1,19 +1,16 @@
-import axios from 'axios' // TODO: SWAP THIS
-import history from 'utils/history'
+import axios from 'axios'
+import Router from 'next/router'
 
 export const clearErrors = () => ({ type: 'CLEAR_ERRORS' })
 
 export const createNewEntry = customerInfo => dispatch => {
   return dispatch({
     type: 'CREATE_ENTRY',
-    payload: axios.post('/api/bonus-offer/new-entry', entryData),
+    payload: axios.post('/api/entry/new-entry', customerInfo),
   })
-    .then(() => history.push('/')) //TODO: UPDATE
-    .catch(err => {
-      // TODO: IS THERE A BETTER WAY TO DO THIS?????
-      const errorMessage = err.response.data.message
-      if (errorRedirect[errorMessage]) {
-        return history.push(`/offer/${errorRedirect[errorMessage]}`)
-      }
-    })
+  .then(() => Router.push({pathname: '/'}))
+  .catch(err => {
+    // TODO: IS THERE A BETTER WAY TO DO THIS?????
+    const errorMessage = err.response.data.message
+  })
 }

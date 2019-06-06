@@ -19,9 +19,9 @@ const LogoImage = styled.img`
 `
 
 const MainTitle = styled.h1`
-  font-family: Lato;
-  font-weight: bold;
-  color: #453b7a;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  color: ${props => props.theme.colors.purple};
   font-size: 64px;
   margin: 0 0 48px 0;
   text-align: center;
@@ -29,7 +29,7 @@ const MainTitle = styled.h1`
 
 const Paragraph = styled.p`
   font-family: 'Lato', sans-serif;
-  color: #453b7a;
+  color: ${props => props.theme.colors.purple};
   margin: 0 0 20px 0;
   text-align: center;
   font-size: 14px;
@@ -44,7 +44,7 @@ const BoldCopy = styled.span`
 const EmailLink = styled.a`
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  color: #453b7a;
+  color: ${props => props.theme.colors.purple};
 `
 
 const TermsAndConditions = () => (

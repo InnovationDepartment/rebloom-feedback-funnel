@@ -4,7 +4,6 @@ const initialState = {
   error: null,
 }
 
-
 export default function(state = initialState, action) {
   switch (action.type) {
     case 'CREATE_ENTRY_PENDING':
