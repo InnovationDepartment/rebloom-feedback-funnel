@@ -1,17 +1,22 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Link from 'next/link'
-import Router from 'next/Router'
+import Router from 'next/router'
 import styled from 'styled-components'
 import { Formik } from 'formik'
 
 import { media } from '../static/utils/style-utils'
-import Head from '../static/components/head'
+import Head from '../static/components/Head'
+import Spinner from '../static/components/Spinner'
 import { PrimaryButton } from '../static/components/buttons'
 import { TextInput } from '../static/components/inputs'
 import { H2, H3, H4, P, ErrorP } from '../static/components/text'
 
-import { clearErrors, updateEntry } from '../static/actions/entries'
+import {
+  clearErrors,
+  updateEntry,
+  userRedirect,
+} from '../static/actions/entries'
 
 const TopImageBackground = styled.div`
   background-image: url('static/assets/images/background.jpg');
@@ -106,13 +111,19 @@ const StyledLink = styled.span`
 `
 
 class OrderID extends Component {
+  componentDidMount() {
+    const { entry, userRedirect } = this.props
+    if (!entry || !entry.id) userRedirect('/')
+  }
+
   render() {
-    const { loading, entry, error } = this.props
+    const { loading, entry, error, userRedirect } = this.props
+
     if (loading) return <Spinner />
 
     return (
       <Fragment>
-        <Head title="reBloom" />
+        <Head title="reBloom Bonus Offer" />
         <TopImageBackground>
           <ContentContainer>
             <TextContainer>
@@ -181,7 +192,9 @@ class OrderID extends Component {
               </Formik>
               <StyledH4>
                 Not an Amazon customer?{'  '}
-                <StyledLink onClick={() => Router.push('/error?type=invalid')}>
+                <StyledLink
+                  onClick={() => userRedirect('/error', { type: 'invalid' })}
+                >
                   Continue here.
                 </StyledLink>
               </StyledH4>
@@ -217,6 +230,7 @@ const mapState = ({ entries }) => ({
 const mapDispatch = {
   clearErrors,
   updateEntry,
+  userRedirect,
 }
 
 export default connect(

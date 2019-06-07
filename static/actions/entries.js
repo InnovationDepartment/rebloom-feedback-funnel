@@ -1,38 +1,38 @@
 import axios from 'axios'
 import Router from 'next/router'
 
-const errorViews = ['existing-entry']
+const setLoading = () => ({ type: 'SET_LOADING' })
+const clearLoading = () => ({ type: 'CLEAR_LOADING' })
 
-const dispatchErrorView = errorType => {
-  Router.push({
-    pathname: `/error`,
-    query: { type: errorType }, // Error-type becomes query string
-  })
+export const clearErrors = () => ({ type: 'CLEAR_ERRORS' })
+const errViews = ['existing-entry', 'invalid']
+
+// Redirect helper function for use on backend
+const redirect = (pathname, query = {}) => {
+  setLoading() // Because of 'Router.push' delay, manually toggling loading
+  Router.push({ pathname, query }).then(() => clearLoading())
 }
 
-export const clearErrors = () => ({
-  type: 'CLEAR_ERRORS',
-})
+// Exported redirect function to be dispatched from frontend
+export const userRedirect = (pathname, query = {}) => dispatch => {
+  redirect(pathname, query)
+}
 
-export const createNewEntry = customerInfo => dispatch => {
+export const createNewEntry = userInfo => dispatch => {
   return dispatch({
     type: 'CREATE_ENTRY',
-    payload: axios.post('/api/entry/new-entry', customerInfo),
+    payload: axios.post('/api/entry/new-entry', userInfo),
   })
-    .then(() => Router.push({ pathname: '/order-information' }))
+    .then(() => redirect('/order-information'))
     .catch(err => {
-      const errorType = err.response.data.message || 'default'
-      if (errorViews.includes(errorType)) {
-        dispatchErrorView(errorType)
+      const errType = err.response.data.message || 'default'
+      if (errViews.includes(errType)) {
+        redirect('/error', { type: errType })
       }
     })
 }
 
-export const updateEntry = (
-  entryIdentifiers,
-  entryInfo,
-  destination
-) => dispatch => {
+export const updateEntry = (entryIdentifiers, entryInfo, dest) => dispatch => {
   return dispatch({
     type: 'UPDATE_ENTRY',
     payload: axios.post('/api/entry/update-entry', {
@@ -40,11 +40,11 @@ export const updateEntry = (
       entryInfo,
     }),
   })
-    .then(() => Router.push({ pathname: `/${destination}` }))
+    .then(() => redirect(`/${dest}`))
     .catch(err => {
-      const errorType = err.response.data.message || 'default'
-      if (errorViews.includes(errorType)) {
-        dispatchErrorView(errorType)
+      const errType = err.response.data.message || 'default'
+      if (errViews.includes(errType)) {
+        redirect('/error', { type: errType })
       }
     })
 }

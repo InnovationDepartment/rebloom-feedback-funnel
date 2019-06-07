@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Head from '../static/components/head'
+import Head from '../static/components/Head'
 
 const ContentContainer = styled.div`
   height: 100%;

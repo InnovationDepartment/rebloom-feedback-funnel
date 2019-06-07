@@ -3,8 +3,8 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 import { media } from '../static/utils/style-utils'
-import Head from '../static/components/head'
-import Container from '../static/components/container'
+import Head from '../static/components/Head'
+import Container from '../static/components/Container'
 import TermsAndConditions from '../static/components/TandC'
 import { PrimaryButton } from '../static/components/buttons'
 import { H1, H3, P } from '../static/components/text'
@@ -42,7 +42,7 @@ const TermsLinks = styled(P)`
 
 const LandingPage = () => (
   <Fragment>
-    <Head title="reBloom" />
+    <Head title="reBloom Bonus Offer" />
     <Container>
       <BottleImage src="static/assets/images/bottle.png" />
       <TextContainer>

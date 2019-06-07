@@ -103,7 +103,7 @@ nextApp.prepare().then(() => {
   models.sequelize.sync().then(() => {
     app.listen(port, err => {
       if (err) throw err
-      console.log(`Listening on http://localhost:${port}`)
+      console.log(`\n\nListening on http://localhost:${port}\n\n`)
     })
   })
 })

@@ -6,6 +6,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case 'SET_LOADING':
     case 'CREATE_ENTRY_PENDING':
     case 'UPDATE_ENTRY_PENDING':
       return {
@@ -18,7 +19,6 @@ export default function(state = initialState, action) {
     case 'UPDATE_ENTRY_FULFILLED':
       return {
         ...state,
-        loading: false,
         entry: action.payload.data,
         error: null,
       }
@@ -27,7 +27,6 @@ export default function(state = initialState, action) {
     case 'UPDATE_ENTRY_REJECTED':
       return {
         ...state,
-        loading: false,
         error:
           action.payload.response.data.message || action.payload.response.data,
       }
@@ -35,11 +34,13 @@ export default function(state = initialState, action) {
     case 'CLEAR_LOADING':
       return {
         ...state,
+        loading: false,
       }
 
     case 'CLEAR_ERRORS':
       return {
         ...state,
+        loading: false,
         error: null,
       }
 

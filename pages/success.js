@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 import { media } from '../static/utils/style-utils'
-import Head from '../static/components/head'
-import Container from '../static/components/container'
+import Head from '../static/components/Head'
+import Container from '../static/components/Container'
 import { H1, H3 } from '../static/components/text'
 
 const LogoImage = styled.img`

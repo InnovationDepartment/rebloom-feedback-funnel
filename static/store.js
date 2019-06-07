@@ -9,10 +9,10 @@ import mainReducer from './reducers'
 function initializeStore() {
   const promise = createPromise({ types: { fulfilled: 'success' } })
   let middleware = [thunk, promise]
-  // if (process.env.NODE_ENV !== 'production') {
-  //   const logger = require('redux-logger').default
-  //   middleware = [...middleware, logger]
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    const logger = require('redux-logger').default
+    middleware = [...middleware, logger]
+  }
 
   const store = createStore(mainReducer, applyMiddleware(...middleware))
 
