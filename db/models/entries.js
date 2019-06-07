@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
       },
       purchase_date: DataTypes.DATE,
+      usage: DataTypes.STRING,
       items: DataTypes.ARRAY(DataTypes.STRING),
       rating: DataTypes.INTEGER,
       comment: DataTypes.TEXT,
@@ -57,7 +58,9 @@ module.exports = (sequelize, DataTypes) => {
         defaults: entryData,
       })
     } catch (e) {
-      throw new Error('Uh oh, we had an issue signing you up. Please try again.')
+      throw new Error(
+        'Uh oh, we had an issue signing you up. Please try again.'
+      )
     }
   }
 
@@ -65,7 +68,9 @@ module.exports = (sequelize, DataTypes) => {
     try {
       return await this.update(entryData)
     } catch (e) {
-      throw new Error('Uh oh, we had an issue updating your information. Please try again.')
+      throw new Error(
+        'Uh oh, we had an issue updating your information. Please try again.'
+      )
     }
   }
 

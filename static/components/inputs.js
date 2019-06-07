@@ -4,9 +4,8 @@ import { media } from '../utils/style-utils'
 export const TextInput = styled.input`
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  color: #453b7a;
-  border: 1px solid #979797;
-
+  color: ${props => props.theme.colors.purple};
+  border: 1px solid ${props => props.theme.colors.lightGray};
   ${media.small`
     border-radius: 10px;
     font-size: 20px;
@@ -22,4 +21,20 @@ export const TextInput = styled.input`
   :last-of-type {
     margin-bottom: 0;
   }
+`
+
+export const TextArea = styled.textarea`
+  background-color: white;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: ${props => props.theme.colors.purple};
+  border: 2px solid
+    ${props =>
+      props.error ? props.theme.colors.errorRed : props.theme.colors.lightGray};
+  border-radius: 10px;
+  width: 95%;
+  height: 100px;
+  margin: 38px 0 6px 0;
+  padding: 15px 27px;
 `

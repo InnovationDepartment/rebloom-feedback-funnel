@@ -1,21 +1,15 @@
 import axios from 'axios'
 import Router from 'next/router'
-
-const setLoading = () => ({ type: 'SET_LOADING' })
-const clearLoading = () => ({ type: 'CLEAR_LOADING' })
+import errorMap from '../utils/errorMap'
 
 export const clearErrors = () => ({ type: 'CLEAR_ERRORS' })
-const errViews = ['existing-entry', 'invalid']
 
-// Redirect helper function for use on backend
-const redirect = (pathname, query = {}) => {
-  setLoading() // Because of 'Router.push' delay, manually toggling loading
-  Router.push({ pathname, query }).then(() => clearLoading())
-}
+// Grabs query string names of all errors for which we have a dedicated
+// error page to display to user
+const errViews = Object.keys(errorMap)
 
-// Exported redirect function to be dispatched from frontend
-export const userRedirect = (pathname, query = {}) => dispatch => {
-  redirect(pathname, query)
+export const userRedirect = (pathname, query = {}) => {
+  Router.push({ pathname, query })
 }
 
 export const createNewEntry = userInfo => dispatch => {
@@ -23,11 +17,11 @@ export const createNewEntry = userInfo => dispatch => {
     type: 'CREATE_ENTRY',
     payload: axios.post('/api/entry/new-entry', userInfo),
   })
-    .then(() => redirect('/order-information'))
+    .then(() => userRedirect('/order-information'))
     .catch(err => {
-      const errType = err.response.data.message || 'default'
+      const errType = err.response.data.message
       if (errViews.includes(errType)) {
-        redirect('/error', { type: errType })
+        userRedirect('/error', { type: errType })
       }
     })
 }
@@ -40,11 +34,11 @@ export const updateEntry = (entryIdentifiers, entryInfo, dest) => dispatch => {
       entryInfo,
     }),
   })
-    .then(() => redirect(`/${dest}`))
+    .then(() => userRedirect(`/${dest}`))
     .catch(err => {
-      const errType = err.response.data.message || 'default'
+      const errType = err.response.data.message
       if (errViews.includes(errType)) {
-        redirect('/error', { type: errType })
+        userRedirect('/error', { type: errType })
       }
     })
 }

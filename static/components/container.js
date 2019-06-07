@@ -4,13 +4,13 @@ import { media } from '../utils/style-utils'
 
 const BackgroundContainer = styled.div`
   background-image: url('static/assets/images/background.jpg');
-  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   background-repeat: no-repeat;
-  background-position-x: center;
-  background-position-y: center;
+  background-size: cover;
   position: relative;
   cursor: default;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 `
 
@@ -21,11 +21,26 @@ const ContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  position: relative;
+  padding: 150px 0 0 0;
+`
+
+const LogoImage = styled.img`
+  height: 40px;
+  width: auto;
+  margin: 37px 0 53px 0;
+  position: absolute;
+  top: 10px;
 `
 
 const Container = props => (
   <BackgroundContainer>
-    <ContentContainer>{props.children}</ContentContainer>
+    <ContentContainer>
+      {!props.hideLogo && (
+        <LogoImage src="static/assets/images/logo-white.png" />
+      )}
+      {props.children}
+    </ContentContainer>
   </BackgroundContainer>
 )
 

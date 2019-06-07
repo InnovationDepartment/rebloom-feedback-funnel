@@ -15,14 +15,6 @@ import { H2, P, ErrorP } from '../static/components/text'
 
 import { clearErrors, createNewEntry } from '../static/actions/entries'
 
-const LogoImage = styled.img`
-  height: 40px;
-  width: auto;
-  margin: 37px 0 53px 0;
-  position: absolute;
-  top: 10px;
-`
-
 const StyledH2 = styled(H2)`
   margin-bottom: 50px;
 `
@@ -62,10 +54,9 @@ class SignUp extends Component {
     
     return (
       <Fragment>
-        <Head title="reBloom - Bonus Offer Sign Up" />
+        <Head title="reBloom - Bonus Offer" />
         <Container>
           <TextContainer>
-            <LogoImage src="static/assets/images/logo-white.png" />
             <StyledH2>
               We want to hear from you! Tell us about your experience for a free
               7-pack.

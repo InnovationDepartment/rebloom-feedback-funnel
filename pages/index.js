@@ -43,7 +43,7 @@ const TermsLinks = styled(P)`
 const LandingPage = () => (
   <Fragment>
     <Head title="reBloom Bonus Offer" />
-    <Container>
+    <Container hideLogo>
       <BottleImage src="static/assets/images/bottle.png" />
       <TextContainer>
         <H1>Free 7-Pack of reBloom</H1>

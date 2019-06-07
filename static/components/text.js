@@ -22,7 +22,7 @@ export const H2 = styled.h2`
 
 export const H3 = styled.h3`
   font-family: 'Lato', sans-serif;
-  font-weight: 100;
+  font-weight: 400;
   color: #fff;
   font-size: 36px;
   margin: 0;
@@ -52,7 +52,7 @@ export const P = styled.p`
 
 export const ErrorP = styled.h5`
   font-family: 'Lato', sans-serif;
-  color: white;
+  color: ${props => props.theme.colors.errorRed};
   margin: 0;
   text-align: center;
   ${media.small`

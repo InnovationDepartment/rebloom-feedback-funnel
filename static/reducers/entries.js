@@ -6,7 +6,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case 'SET_LOADING':
     case 'CREATE_ENTRY_PENDING':
     case 'UPDATE_ENTRY_PENDING':
       return {
@@ -29,12 +28,6 @@ export default function(state = initialState, action) {
         ...state,
         error:
           action.payload.response.data.message || action.payload.response.data,
-      }
-
-    case 'CLEAR_LOADING':
-      return {
-        ...state,
-        loading: false,
       }
 
     case 'CLEAR_ERRORS':

@@ -30,6 +30,14 @@ const TopImageBackground = styled.div`
   width: 100%;
 `
 
+const LogoImage = styled.img`
+  height: 40px;
+  width: auto;
+  margin: 37px 0 53px 0;
+  position: absolute;
+  top: 10px;
+`
+
 const GreyBackground = styled.div`
   background-color: #faf9ff;
   width: 100%;
@@ -39,15 +47,6 @@ const ContentContainer = styled.div`
   height: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding-bottom: 80px;
-`
-
-const LogoImage = styled.img`
-  height: 40px;
-  width: auto;
-  margin-top: 37px;
-  position: absolute;
-  top: 10px;
 `
 
 const StyledH2 = styled(H2)`
@@ -89,7 +88,8 @@ const TextContainer = styled.div`
 const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `
 
 const StyledErrorP = styled(P)`
@@ -113,7 +113,11 @@ const StyledLink = styled.span`
 class OrderID extends Component {
   componentDidMount() {
     const { entry, userRedirect } = this.props
-    if (!entry || !entry.id) userRedirect('/')
+    // if (!entry || !entry.id) userRedirect('/')
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors()
   }
 
   render() {
@@ -150,7 +154,8 @@ class OrderID extends Component {
                     entry: { id, email },
                   } = this.props
 
-                  updateEntry({ id, email }, values, 'usage')
+                  const entryIdentifiers = { id, email }
+                  updateEntry(entryIdentifiers, values, 'usage')
                   setSubmitting(false)
                 }}
               >

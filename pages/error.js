@@ -4,6 +4,7 @@ import Router, { withRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { media } from '../static/utils/style-utils'
+import errorMap from '../static/utils/errorMap'
 import Head from '../static/components/Head'
 import Container from '../static/components/Container'
 import TermsAndConditions from '../static/components/TandC'
@@ -55,28 +56,6 @@ const StyledLink = styled.a`
 const UnderlinedLink = styled(StyledLink)`
   text-decoration: underline;
 `
-
-const errorMap = {
-  'existing-entry': {
-    header: 'Oops!',
-    subheader:
-      'It seems like you’ve already redeemed  your free 7-bottle pack.',
-    body1: 'This offer is only available one time per household.',
-  },
-  invalid: {
-    header: 'Oops!',
-    subheader:
-      'Unfortunately, you don’t qualify for this offer. In the meantime, get 25% off your next  reBloom order.',
-    buttonCopy: 'GET 25% OFF',
-    buttonDest: 'http://www.google.com',
-    contactInfo: true,
-  },
-  default: {
-    header: 'Oops!',
-    subheader: 'Something went wrong.',
-    body1: 'Plase try again.',
-  },
-}
 
 class Error extends Component {
   render() {

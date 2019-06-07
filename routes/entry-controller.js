@@ -32,21 +32,20 @@ router.post(
   asyncWrapper(async (req, res) => {
     const {
       entryIdentifiers: { id, email },
-      entryInfo: { order_id },
+      entryInfo,
     } = req.body
 
-    const lowerCaseEmail = email.toLowerCase()
     const entry = await Entries.findOne({
       where: {
         id: { [Op.eq]: id },
-        email: { [Op.eq]: email },
+        email: { [Op.eq]: email.toLowerCase() },
       },
     })
 
     // Entry already exists with this email and has already been redeemed
     if (entry.has_redeemed) throw new createError('existing-entry')
 
-    const updatedEntry = await entry.updateEntry({ order_id })
+    const updatedEntry = await entry.updateEntry(entryInfo)
 
     res.status(200).send(updatedEntry)
   })
