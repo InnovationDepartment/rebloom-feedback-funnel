@@ -49,5 +49,19 @@
     "@babel/preset-react": "^7.0.0",
     "babel-plugin-styled-components": "^1.10.0",
     "sequelize-cli": "^5.4.0"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "app.js",
+      "db/*",
+      "routes/*",
+      "util/*",
+      "queue/*",
+      "middleware/*"
+    ],
+    "ignore": [
+      "pages/*",
+      "node_modules/*"
+    ]
   }
 }
