@@ -44,12 +44,9 @@ nextApp.prepare().then(() => {
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
-  console.log('FIRSTd')
   app.use('/api', indexRouter)
 
-  console.log('BEFORE *')
   app.get('*', (req, res) => handle(req, res))
-  console.log('AFTER *')
 
   // app.use(express.static(path.join(__dirname, 'public')))
 
@@ -75,7 +72,6 @@ nextApp.prepare().then(() => {
   app.use(passport.session())
 
   // app.use(express.static(path.join(__dirname, 'public')))
-  console.log('BEFORE API')
   app.use('/api', indexRouter)
 
   app.use(function(err, req, res, next) {

@@ -51,4 +51,63 @@ router.post(
   })
 )
 
+router.post(
+  '/look-up-order',
+  asyncWrapper(async (req, res) => {
+    const { order_id } = req.body
+
+    // Lookup for Amazon.com orders
+    const amazonOrder = await AmazonOrders.findOne({
+      where: {
+        order_id: { [Op.eq]: order_id },
+      },
+    })
+    if (!amazonOrder) throw new createError(400, 'invalid')
+
+    // Check against our DB to make sure order ID hasn't already been used
+    const existingEntry = await Entries.findOne({
+      where: {
+        order_id: { [Op.eq]: order_id },
+      },
+    })
+    if (existingEntry && existingEntry.has_redeemed) {
+      throw new createError(400, 'existing-entry')
+    }
+
+    const formattedItems = amazonOrder.items_asins.split(',')
+
+    const entry = await Entries.findOne({
+      where: {
+        id: { [Op.eq]: id },
+        email: { [Op.eq]: email.toLowerCase() },
+      },
+    })
+
+    const bonus_product = formattedItems.length === 1 ? formattedItems[0] : null
+    const updatedEntry = await entry.updateEntry({
+      id,
+      order_id,
+      bonus_product,
+      items: formattedItems,
+      purchase_date: amazonOrder.order_purchase_date,
+      order_valid: true,
+    })
+
+    const totalDiscount = amazonOrder.discount.split(',').reduce((sum, discount) => {
+      sum += Number(discount)
+      return sum
+    }, 0)
+
+    const totalAmount = amazonOrder.price.split(',').reduce((sum, discount) => {
+      sum += Number(discount)
+      return sum
+    }, 0)
+
+    const boughtWithMajorDiscount = totalDiscount / totalAmount > 0.3
+    if (boughtWithMajorDiscount) throw new createError(400, 'qualify')
+
+    res.status(200).send(updatedEntry)
+  })
+)
+
 module.exports = router
