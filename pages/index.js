@@ -3,11 +3,11 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 import { media } from '../utils/style-utils'
-import Head from '../static/components/Head'
-import Container from '../static/components/Container'
-import TermsAndConditions from '../static/components/TandC'
-import { PrimaryButton } from '../static/components/buttons'
-import { H1, H3, P } from '../static/components/text'
+import Head from '../components/Head'
+import Container from '../components/Container'
+import TermsAndConditions from '../components/TandC'
+import { PrimaryButton } from '../components/buttons'
+import { H1, H3, P } from '../components/text'
 
 const BottleImage = styled.img`
   height: 525px;

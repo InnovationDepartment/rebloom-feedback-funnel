@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { media } from '../../utils/style-utils'
+import { media } from '../utils/style-utils'
 
 export const H1 = styled.h1`
   font-family: 'Lato', sans-serif;

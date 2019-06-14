@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import { media } from '../utils/style-utils'
-import Head from '../static/components/Head'
-import Spinner from '../static/components/Spinner'
-import Container from '../static/components/Container'
-import TermsAndConditions from '../static/components/TandC'
-import { PrimaryButton } from '../static/components/buttons'
-import { H2, H3, P, ErrorP } from '../static/components/text'
+import Head from '../components/Head'
+import Spinner from '../components/Spinner'
+import Container from '../components/Container'
+import TermsAndConditions from '../components/TandC'
+import { PrimaryButton } from '../components/buttons'
+import { H2, H3, P, ErrorP } from '../components/text'
 
 import {
   clearErrors,

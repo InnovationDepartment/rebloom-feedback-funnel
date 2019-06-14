@@ -6,11 +6,11 @@ import styled from 'styled-components'
 import { Formik } from 'formik'
 
 import { media } from '../utils/style-utils'
-import Head from '../static/components/Head'
-import Spinner from '../static/components/Spinner'
-import { PrimaryButton } from '../static/components/buttons'
-import { TextInput } from '../static/components/inputs'
-import { H2, H3, H4, P, ErrorP } from '../static/components/text'
+import Head from '../components/Head'
+import Spinner from '../components/Spinner'
+import { PrimaryButton } from '../components/buttons'
+import { TextInput } from '../components/inputs'
+import { H2, H3, H4, P, ErrorP } from '../components/text'
 
 import {
   clearErrors,

@@ -5,11 +5,11 @@ import styled from 'styled-components'
 
 import { media } from '../utils/style-utils'
 import errorMap from '../static/utils/errorMap'
-import Head from '../static/components/Head'
-import Container from '../static/components/Container'
-import TermsAndConditions from '../static/components/TandC'
-import { PrimaryButton } from '../static/components/buttons'
-import { H1, H2, H4 } from '../static/components/text'
+import Head from '../components/Head'
+import Container from '../components/Container'
+import TermsAndConditions from '../components/TandC'
+import { PrimaryButton } from '../components/buttons'
+import { H1, H2, H4 } from '../components/text'
 
 const LogoImage = styled.img`
   height: 40px;
