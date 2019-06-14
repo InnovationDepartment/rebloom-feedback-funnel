@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 import Head from '../static/components/Head'
 import Spinner from '../static/components/Spinner'
 import Container from '../static/components/Container'
@@ -13,7 +13,7 @@ import { PrimaryButton } from '../static/components/buttons'
 import { TextInput } from '../static/components/inputs'
 import { H2, P, ErrorP } from '../static/components/text'
 
-import { clearErrors, createNewEntry } from '../static/actions/entries'
+import { clearErrors, createNewEntry } from '../redux/actions/entries'
 
 const StyledH2 = styled(H2)`
   margin-bottom: 50px;
@@ -51,7 +51,7 @@ class SignUp extends Component {
   render() {
     const { loading, entry, error } = this.props
     if (loading) return <Spinner />
-    
+
     return (
       <Fragment>
         <Head title="reBloom - Bonus Offer" />

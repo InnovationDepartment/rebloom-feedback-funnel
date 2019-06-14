@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 import Head from '../static/components/Head'
 import Spinner from '../static/components/Spinner'
 import Container from '../static/components/Container'
@@ -14,7 +14,7 @@ import {
   clearErrors,
   updateEntry,
   userRedirect,
-} from '../static/actions/entries'
+} from '../redux/actions/entries'
 
 const StyledH2 = styled(H2)`
   margin-bottom: 50px;

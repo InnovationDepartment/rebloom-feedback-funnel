@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { Normalize } from 'styled-normalize'
 
-import withReduxStore from '../static/store'
+import withReduxStore from '../redux/store'
 
 const theme = {
   colors: {

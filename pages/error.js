@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Router, { withRouter } from 'next/router'
 import styled from 'styled-components'
 
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 import errorMap from '../static/utils/errorMap'
 import Head from '../static/components/Head'
 import Container from '../static/components/Container'

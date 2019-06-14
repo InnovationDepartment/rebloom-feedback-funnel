@@ -5,7 +5,7 @@ import Router from 'next/router'
 import styled from 'styled-components'
 import { Formik } from 'formik'
 
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 import Head from '../static/components/Head'
 import Spinner from '../static/components/Spinner'
 import { PrimaryButton } from '../static/components/buttons'
@@ -16,7 +16,7 @@ import {
   clearErrors,
   updateEntry,
   userRedirect,
-} from '../static/actions/entries'
+} from '../redux/actions/entries'
 
 const TopImageBackground = styled.div`
   background-image: url('static/assets/images/background.jpg');

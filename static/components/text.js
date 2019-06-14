@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { media } from '../utils/style-utils'
+import { media } from '../../utils/style-utils'
 
 export const H1 = styled.h1`
   font-family: 'Lato', sans-serif;
@@ -18,7 +18,6 @@ export const H2 = styled.h2`
   margin: 0;
   text-align: center;
 `
-
 
 export const H3 = styled.h3`
   font-family: 'Lato', sans-serif;
@@ -48,7 +47,6 @@ export const P = styled.p`
   margin-bottom: 22px;
   padding: 0 15px;
 `
-
 
 export const ErrorP = styled.h5`
   font-family: 'Lato', sans-serif;

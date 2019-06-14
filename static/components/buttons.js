@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { media } from '../utils/style-utils'
+import { media } from '../../utils/style-utils'
 
 export const PrimaryButton = styled.button`
   background-color: ${props => props.theme.colors.babyBlue};

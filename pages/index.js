@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-import { media } from '../static/utils/style-utils'
+import { media } from '../utils/style-utils'
 import Head from '../static/components/Head'
 import Container from '../static/components/Container'
 import TermsAndConditions from '../static/components/TandC'

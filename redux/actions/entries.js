@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Router from 'next/router'
-import errorMap from '../utils/errorMap'
+import errorMap from '../../utils/errorMap'
 
 export const clearErrors = () => ({ type: 'CLEAR_ERRORS' })
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { media } from '../utils/style-utils'
+import { media } from '../../utils/style-utils'
 
 export const TextInput = styled.input`
   font-family: 'Lato', sans-serif;
