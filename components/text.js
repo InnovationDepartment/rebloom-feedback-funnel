@@ -19,12 +19,19 @@ export const H1 = styled.h1`
 `
 
 export const H2 = styled.h2`
-  font-family: 'Lato', sans-serif;
-  font-weight: 500;
+  font-family: 'Silka-Medium', sans-serif;
+  font-weight: normal;
   color: #fff;
-  font-size: 48px;
   margin: 0;
   text-align: center;
+  ${media.small`
+    font-size: 20px;
+    margin-bottom: 11px;
+  `};
+  ${media.medium`
+    font-size: 48px;
+    margin-bottom: 22px;
+  `};
 `
 
 export const H3 = styled.h3`

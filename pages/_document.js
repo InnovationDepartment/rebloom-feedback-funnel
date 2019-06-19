@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Silka-Regular';
     src: url('/static/assets/fonts/Silka-Regular.otf');
   }
+  @font-face {
+    font-family: 'Silka-Medium';
+    src: url('/static/assets/fonts/Silka-Medium.otf');
+  }
 `
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {

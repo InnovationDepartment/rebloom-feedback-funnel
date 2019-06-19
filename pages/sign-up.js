@@ -27,6 +27,7 @@ const TextContainer = styled.div`
   color: #fff;
   height: 100%;
   margin: 0 auto;
+  padding: 0 10px;
 `
 
 const ButtonContainer = styled.div`
@@ -58,8 +59,8 @@ class SignUp extends Component {
         <Container>
           <TextContainer>
             <StyledH2>
-              We want to hear from you! Tell us about your experience for a free
-              7-pack.
+              We want to hear from you! <br />
+              Tell us about your experience for a free 7-pack.
             </StyledH2>
             <Formik
               initialValues={{
@@ -104,10 +105,7 @@ class SignUp extends Component {
                       placeholder="First Name"
                     />
                     <StyledErrorP>
-                      {(errors.first_name &&
-                        touched.first_name &&
-                        errors.first_name) ||
-                        ' '}
+                      {(errors.first_name && touched.first_name && errors.first_name) || ' '}
                     </StyledErrorP>
                   </div>
                   <div>
@@ -121,10 +119,7 @@ class SignUp extends Component {
                       placeholder="Last Name"
                     />
                     <StyledErrorP>
-                      {(errors.last_name &&
-                        touched.last_name &&
-                        errors.last_name) ||
-                        ' '}
+                      {(errors.last_name && touched.last_name && errors.last_name) || ' '}
                     </StyledErrorP>
                   </div>
                   <div>

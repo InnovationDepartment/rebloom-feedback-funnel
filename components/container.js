@@ -24,7 +24,8 @@ const ContentContainer = styled.div`
   position: relative;
 
   ${media.small`
-    padding: 40px 0 0 0;
+    padding: 0;
+    padding-top: ${props => (props.hideLogo ? '40px' : '100px')}
   `};
   ${media.medium`
     padding: 150px 0 0 0;
@@ -32,16 +33,21 @@ const ContentContainer = styled.div`
 `
 
 const LogoImage = styled.img`
-  height: 40px;
   width: auto;
-  margin: 37px 0 53px 0;
   position: absolute;
-  top: 10px;
+  ${media.small`
+    height: 32px;
+    top: 32px;
+  `};
+  ${media.medium`
+    height: 40px;
+    top: 37px;
+  `};
 `
 
 const Container = props => (
   <BackgroundContainer>
-    <ContentContainer>
+    <ContentContainer {...props}>
       {!props.hideLogo && <LogoImage src="static/assets/images/logo-white.png" />}
       {props.children}
     </ContentContainer>
