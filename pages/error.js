@@ -4,7 +4,7 @@ import Router, { withRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { media } from '../utils/style-utils'
-import errorMap from '../static/utils/errorMap'
+import errorMap from '../utils/errorMap'
 import Head from '../components/Head'
 import Container from '../components/Container'
 import TermsAndConditions from '../components/TandC'
@@ -62,15 +62,9 @@ class Error extends Component {
     const { router } = this.props
 
     const errorKey = (router && router.query && router.query.type) || 'default'
-    const {
-      header,
-      subheader,
-      buttonCopy,
-      buttonDest,
-      body1,
-      body2,
-      contactInfo,
-    } = errorMap[errorKey]
+    const { header, subheader, buttonCopy, buttonDest, body1, body2, contactInfo } = errorMap[
+      errorKey
+    ]
 
     return (
       <div>
@@ -91,11 +85,8 @@ class Error extends Component {
             )}
             {contactInfo && (
               <StyledH4>
-                If you think this was an error, please write to our support team
-                at
-                <UnderlinedLink href="mailto:help@rebloom.com">
-                  help@rebloom.com
-                </UnderlinedLink>
+                If you think this was an error, please write to our support team at
+                <UnderlinedLink href="mailto:help@rebloom.com">help@rebloom.com</UnderlinedLink>
                 and we’ll be sure to take care of you.
               </StyledH4>
             )}

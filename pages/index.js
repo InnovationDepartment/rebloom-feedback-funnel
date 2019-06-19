@@ -9,9 +9,49 @@ import TermsAndConditions from '../components/TandC'
 import { PrimaryButton } from '../components/buttons'
 import { H1, H3, P } from '../components/text'
 
-const BottleImage = styled.img`
-  height: 525px;
-  margin: 0 5% 0 10%;
+const BottleImage = styled.img.attrs(props => ({
+  src: 'static/assets/images/bottle.png',
+}))`
+  ${media.small`
+    height: 200px;
+  `};
+  ${media.medium`
+    height: 525px;
+    margin: 0 5% 0 10%;
+  `};
+`
+const DesktopBottleImage = styled(BottleImage)`
+  ${media.small`
+    display: none;
+  `};
+  ${media.medium`
+    display: block;
+  `};
+`
+
+const MobileBottleImage = styled(BottleImage)`
+  ${media.small`
+    display: block;
+    margin-bottom: 42px;
+  `};
+  ${media.medium`
+    display: none;
+  `};
+`
+
+const SubHeading = styled(H3)`
+  ${media.small`
+    margin-bottom: 25px;
+  `};
+`
+
+const TermsText = styled(P)`
+  ${media.small`
+    margin-bottom: 36px
+  `};
+  ${media.medium`
+    margin-bottom: 22px;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -25,49 +65,62 @@ const TextContainer = styled.div`
   max-width: 700px;
 `
 
-const TermsLinksContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: fit-content;
-  font-size: 22px;
-  margin-top: 20px;
+const TermsLinksContainer = styled(P)`
+  ${media.small`
+    font-size: 10px;
+    line-height: 10px;
+  `};
+  ${media.medium`
+    font-size: 18px;
+    line-height: 18px;
+  `};
 `
 
-const TermsLinks = styled(P)`
+const TermsLinks = styled.span`
   text-decoration: none !important;
   color: #fff;
   margin: 0;
   cursor: pointer;
 `
 
+const CTAButton = styled(PrimaryButton)`
+  ${media.small`
+    margin-bottom: 36px
+  `};
+  ${media.medium`
+    margin-bottom: 22px;
+  `};
+`
+
 const LandingPage = () => (
   <Fragment>
     <Head title="reBloom Bonus Offer" />
     <Container hideLogo>
-      <BottleImage src="static/assets/images/bottle.png" />
+      <DesktopBottleImage />
       <TextContainer>
         <H1>Free 7-Pack of reBloom</H1>
-        <H3>Seriously, no strings attached.</H3>
+        <SubHeading>Seriously, no strings attached.</SubHeading>
+        <MobileBottleImage />
         <Link href="/sign-up">
-          <PrimaryButton>I WANT FREE REBLOOM</PrimaryButton>
+          <CTAButton>I WANT FREE REBLOOM</CTAButton>
         </Link>
-        <div>
-          <P>
-            This offer is valid for past Amazon customers only. To qualify for a
-            free seven-pack of reBloom, you must provide your Order ID as proof
-            of purchase. Order must have been purchased with no discount code
-            greater than 30%. Valid in the US only. Limit one per household.
-          </P>
+        <>
+          <TermsText>
+            This offer is valid for past Amazon customers only. To qualify for a free seven-pack of
+            reBloom, you must provide your Order ID as proof of purchase. Order must have been
+            purchased with no discount code greater than 30%. Valid in the US only. Limit one per
+            household.
+          </TermsText>
           <TermsLinksContainer>
             <Link href="/terms-and-conditions">
               <TermsLinks>Terms and Conditions </TermsLinks>
             </Link>
-            {'  '}|{'  '}
+            <TermsLinks>&nbsp;&nbsp;|&nbsp;&nbsp;</TermsLinks>
             <Link href="/privacy-policy">
               <TermsLinks>Privacy Policy </TermsLinks>
             </Link>
           </TermsLinksContainer>
-        </div>
+        </>
       </TextContainer>
     </Container>
   </Fragment>

@@ -22,7 +22,13 @@ const ContentContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   position: relative;
-  padding: 150px 0 0 0;
+
+  ${media.small`
+    padding: 40px 0 0 0;
+  `};
+  ${media.medium`
+    padding: 150px 0 0 0;
+  `};
 `
 
 const LogoImage = styled.img`
@@ -36,9 +42,7 @@ const LogoImage = styled.img`
 const Container = props => (
   <BackgroundContainer>
     <ContentContainer>
-      {!props.hideLogo && (
-        <LogoImage src="static/assets/images/logo-white.png" />
-      )}
+      {!props.hideLogo && <LogoImage src="static/assets/images/logo-white.png" />}
       {props.children}
     </ContentContainer>
   </BackgroundContainer>

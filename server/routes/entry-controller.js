@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const { Op } = require('sequelize')
 const createError = require('http-errors')
-// const differenceInDays = require('date-fns/difference_in_days')
-// const addDays = require('date-fns/add_days')
 
 const asyncWrapper = require('../middleware/async-wrapper')
 const { Entries } = require('../db/models')
+const { createShopifyOrder } = require('../util/shopify-api')
 
 router.post(
   '/new-entry',
@@ -107,6 +106,14 @@ router.post(
     if (boughtWithMajorDiscount) throw new createError(400, 'qualify')
 
     res.status(200).send(updatedEntry)
+  })
+)
+
+router.post(
+  '/process-order',
+  asyncWrapper(async (req, res) => {
+    const order = await createShopifyOrder()
+    res.status(200).send(order)
   })
 )
 

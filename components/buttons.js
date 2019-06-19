@@ -9,16 +9,14 @@ export const PrimaryButton = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Silka-Bold', sans-serif;
   font-weight: 700;
   color: white;
   border: 1px solid ${props => props.theme.colors.lightGray};
   ${media.small`
     border-radius: 25px;
-    font-size: 26px;
-    width: 225px;
-    padding: 12px 13px;
-    margin: 20px 0;
+    font-size: 18px;
+    padding: 13px 18px;
   `}
   ${media.large`
     border-radius: 25px;
