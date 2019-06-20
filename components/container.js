@@ -28,7 +28,7 @@ const ContentContainer = styled.div`
     padding-top: ${props => (props.hideLogo ? '40px' : '100px')}
   `};
   ${media.medium`
-    padding: 150px 0 0 0;
+    padding: 128px 0 0 0;
   `};
 `
 

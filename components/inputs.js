@@ -16,17 +16,31 @@ export const TextInput = styled.input`
     border-radius: 10px;
     font-size: 18px;
     min-width: 250px;
-    margin: 12px 0;
     padding: 14px;
   `}
-  ${media.large`
+  ${media.medium`
     font-size: 24px;
     min-width: 452px;
-    padding: 14px;
+    padding: 12px;
   `}
   :last-of-type {
     margin-bottom: 0;
   }
+`
+
+export const TextInputError = styled.p`
+  font-family: 'Lato', sans-serif;
+  color: ${props => props.theme.colors.errorRed};
+  margin: 0;
+  margin-top: 3px;
+  ${media.small`
+  font-size: 10px;
+  height: 14px;
+ `};
+  ${media.medium`
+  font-size: 12px;
+  height: 20px;
+ `};
 `
 
 export const TextArea = styled.textarea`

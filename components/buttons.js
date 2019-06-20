@@ -16,9 +16,10 @@ export const PrimaryButton = styled.button`
   ${media.small`
     border-radius: 25px;
     font-size: 18px;
+    width: 250px;
     padding: 13px 18px;
   `}
-  ${media.large`
+  ${media.medium`
     border-radius: 25px;
     font-size: 30px;
     width: 450px;

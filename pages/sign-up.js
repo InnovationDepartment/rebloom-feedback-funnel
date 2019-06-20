@@ -10,7 +10,7 @@ import Spinner from '../components/Spinner'
 import Container from '../components/Container'
 import TermsAndConditions from '../components/TandC'
 import { PrimaryButton } from '../components/buttons'
-import { TextInput } from '../components/inputs'
+import { TextInput, TextInputError } from '../components/inputs'
 import { H2, P, ErrorP } from '../components/text'
 
 import { clearErrors, createNewEntry } from '../redux/actions/entries'
@@ -37,12 +37,17 @@ const ButtonContainer = styled.div`
   align-items: center;
 `
 
-const StyledErrorP = styled(P)`
-  font-size: 12px;
-  margin: 6px 0 0 0;
-  height: 16px;
-  font-style: normal;
-`
+// const TextInputError = styled(P)`
+//   margin: 6px 0 0 0;
+//   height: 16px;
+//   font-style: normal;
+//   ${media.small`
+//     font-size: 10px;
+//   `};
+//   ${media.medium`
+//     font-size: 12px;
+//   `};
+// `
 
 class SignUp extends Component {
   componentWillUnmount() {
@@ -59,8 +64,7 @@ class SignUp extends Component {
         <Container>
           <TextContainer>
             <StyledH2>
-              We want to hear from you! <br />
-              Tell us about your experience for a free 7-pack.
+              We want to hear from you! Tell us about your experience for a free 7-pack.
             </StyledH2>
             <Formik
               initialValues={{
@@ -104,9 +108,9 @@ class SignUp extends Component {
                       value={values.first_name}
                       placeholder="First Name"
                     />
-                    <StyledErrorP>
+                    <TextInputError>
                       {(errors.first_name && touched.first_name && errors.first_name) || ' '}
-                    </StyledErrorP>
+                    </TextInputError>
                   </div>
                   <div>
                     <TextInput
@@ -118,9 +122,9 @@ class SignUp extends Component {
                       value={values.last_name}
                       placeholder="Last Name"
                     />
-                    <StyledErrorP>
+                    <TextInputError>
                       {(errors.last_name && touched.last_name && errors.last_name) || ' '}
-                    </StyledErrorP>
+                    </TextInputError>
                   </div>
                   <div>
                     <TextInput
@@ -132,9 +136,9 @@ class SignUp extends Component {
                       value={values.email}
                       placeholder="Email Address"
                     />
-                    <StyledErrorP>
+                    <TextInputError>
                       {(errors.email && touched.email && errors.email) || ' '}
-                    </StyledErrorP>
+                    </TextInputError>
                   </div>
                   <ButtonContainer>
                     <ErrorP>{(error && error) || ' '}</ErrorP>

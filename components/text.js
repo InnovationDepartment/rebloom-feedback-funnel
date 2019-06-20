@@ -80,10 +80,9 @@ export const ErrorP = styled.h5`
   margin: 0;
   text-align: center;
   ${media.small`
-   font-size: 12px;
-   line-height: 20px;
+   font-size: 10px;
   `};
   ${media.medium`
-   font-size: 16px;
+   font-size: 12px;
   `};
 `
