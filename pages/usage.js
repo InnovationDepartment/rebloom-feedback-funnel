@@ -10,14 +10,15 @@ import TermsAndConditions from '../components/TandC'
 import { PrimaryButton } from '../components/buttons'
 import { H2, H3, P, ErrorP } from '../components/text'
 
-import {
-  clearErrors,
-  updateEntry,
-  userRedirect,
-} from '../redux/actions/entries'
+import { clearErrors, updateEntry, userRedirect } from '../redux/actions/entries'
 
 const StyledH2 = styled(H2)`
-  margin-bottom: 50px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 50px;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -71,8 +72,7 @@ const RadioSelector = styled.div`
 const InnerSelector = styled.div`
   border-radius: 50%;
   cursor: pointer;
-  background-color: ${props =>
-    props.selected ? props.theme.colors.purple : 'none'};
+  background-color: ${props => (props.selected ? props.theme.colors.purple : 'none')};
   width: 15px;
   height: 15px;
 `
@@ -82,13 +82,15 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${media.small`
+    margin-top: 30px;
+  `};
+  ${media.medium`
+    margin-top: 30px;
+  `};
 `
 
-const choices = [
-  'Less than a week ago',
-  'More than a week ago',
-  'More than two weeks ago',
-]
+const choices = ['Less than a week ago', 'More than a week ago', 'More than two weeks ago']
 
 class UsagePeriod extends Component {
   state = {
@@ -156,7 +158,7 @@ class UsagePeriod extends Component {
               <ErrorP>{(error && error) || ' '}</ErrorP>
               <PrimaryButton onClick={this.handleSubmit}>NEXT</PrimaryButton>
             </ButtonContainer>
-            <TermsAndConditions />
+            <TermsAndConditions topMargin="50px" />
           </TextContainer>
         </Container>
       </Fragment>
