@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 const createError = require('http-errors')
 
 const asyncWrapper = require('../middleware/async-wrapper')
-const { Entries } = require('../db/models')
+const { Entries, AmazonOrders } = require('../db/models')
 const { createShopifyOrder } = require('../util/shopify-api')
 
 router.post(
@@ -51,9 +51,10 @@ router.post(
 )
 
 router.post(
-  '/look-up-order',
+  '/lookup-amazon-order',
   asyncWrapper(async (req, res) => {
-    const { order_id } = req.body
+    const { order_id, id, email } = req.body
+    if (!id && !email) throw new createError(400, 'invalid')
 
     // Lookup for Amazon.com orders
     const amazonOrder = await AmazonOrders.findOne({
@@ -73,8 +74,6 @@ router.post(
       throw new createError(400, 'existing-entry')
     }
 
-    const formattedItems = amazonOrder.items_asins.split(',')
-
     const entry = await Entries.findOne({
       where: {
         id: { [Op.eq]: id },
@@ -82,12 +81,9 @@ router.post(
       },
     })
 
-    const bonus_product = formattedItems.length === 1 ? formattedItems[0] : null
     const updatedEntry = await entry.updateEntry({
       id,
       order_id,
-      bonus_product,
-      items: formattedItems,
       purchase_date: amazonOrder.order_purchase_date,
       order_valid: true,
     })

@@ -34,7 +34,25 @@ export const updateEntry = (entryIdentifiers, entryInfo, dest) => dispatch => {
       entryInfo,
     }),
   })
-    .then(() => userRedirect(`/${dest}`))
+    .then(() => {
+      userRedirect(`/${dest}`)
+    })
+    .catch(err => {
+      const errType = err.response.data.message
+      if (errViews.includes(errType)) {
+        userRedirect('/error', { type: errType })
+      }
+    })
+}
+
+export const lookupAmazonOrder = (entryData, nextQuestion) => dispatch => {
+  return dispatch({
+    type: 'LOOKUP_AMAZON_ORDER',
+    payload: axios.post('/api/entry/lookup-amazon-order', entryData),
+  })
+    .then(() => {
+      userRedirect(`/${nextQuestion}`)
+    })
     .catch(err => {
       const errType = err.response.data.message
       if (errViews.includes(errType)) {

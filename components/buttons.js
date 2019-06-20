@@ -23,6 +23,5 @@ export const PrimaryButton = styled.button`
     border-radius: 25px;
     font-size: 30px;
     width: 450px;
-    margin: 20px 0;
   `}
 `

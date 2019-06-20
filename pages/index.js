@@ -32,7 +32,7 @@ const DesktopBottleImage = styled(BottleImage)`
 const MobileBottleImage = styled(BottleImage)`
   ${media.small`
     display: block;
-    margin-bottom: 42px;
+    margin: 25px 0 42px 0;
   `};
   ${media.medium`
     display: none;
@@ -88,7 +88,7 @@ const CTAButton = styled(PrimaryButton)`
     margin-bottom: 36px
   `};
   ${media.medium`
-    margin-bottom: 22px;
+    margin: 50px 0;
   `};
 `
 
@@ -99,7 +99,7 @@ const LandingPage = () => (
       <DesktopBottleImage />
       <TextContainer>
         <H1>Free 7-Pack of reBloom</H1>
-        <SubHeading>Seriously, no strings attached.</SubHeading>
+        <H3>Seriously, no strings attached.</H3>
         <MobileBottleImage />
         <Link href="/sign-up">
           <CTAButton>I WANT FREE REBLOOM</CTAButton>

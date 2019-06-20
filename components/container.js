@@ -37,7 +37,7 @@ const LogoImage = styled.img`
   position: absolute;
   ${media.small`
     height: 32px;
-    top: 32px;
+    top: 35px;
   `};
   ${media.medium`
     height: 40px;
