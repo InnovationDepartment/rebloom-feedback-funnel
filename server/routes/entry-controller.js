@@ -34,12 +34,13 @@ router.post(
       entryInfo,
     } = req.body
 
-    const entry = await Entries.findOne({
-      where: {
-        id: { [Op.eq]: id },
-        email: { [Op.eq]: email.toLowerCase() },
-      },
-    })
+    const entry = await Entries.findByPk(1)
+    // const entry = await Entries.findOne({
+    //   where: {
+    //     id: { [Op.eq]: id },
+    //     email: { [Op.eq]: email.toLowerCase() },
+    //   },
+    // })
 
     // Entry already exists with this email and has already been redeemed
     if (entry.has_redeemed) throw new createError('existing-entry')
@@ -54,7 +55,7 @@ router.post(
   '/lookup-amazon-order',
   asyncWrapper(async (req, res) => {
     const { order_id, id, email } = req.body
-    if (!id && !email) throw new createError(400, 'invalid')
+    // if (!id && !email) throw new createError(400, 'invalid')
 
     // Lookup for Amazon.com orders
     const amazonOrder = await AmazonOrders.findOne({
@@ -74,12 +75,13 @@ router.post(
       throw new createError(400, 'existing-entry')
     }
 
-    const entry = await Entries.findOne({
-      where: {
-        id: { [Op.eq]: id },
-        email: { [Op.eq]: email.toLowerCase() },
-      },
-    })
+    const entry = await Entries.findByPk(1)
+    // const entry = await Entries.findOne({
+    //   where: {
+    //     id: { [Op.eq]: id },
+    //     email: { [Op.eq]: email.toLowerCase() },
+    //   },
+    // })
 
     const updatedEntry = await entry.updateEntry({
       id,

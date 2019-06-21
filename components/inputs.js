@@ -56,11 +56,11 @@ export const TextArea = styled.textarea`
     width: 90%;
     padding: 10px 10px;
     font-size: 14px;
-    margin: 15px 0 6px 0;
+    margin: 10px 0 6px 0;
   `};
   ${media.medium`
-    width: 95%;
+    width: 100%;
     font-size: 24px;
-    margin: 38px 0 6px 0;
+    margin: 10px 0 6px 0;
   `};
 `

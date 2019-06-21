@@ -105,7 +105,12 @@ const CharacterCounterError = styled(CharacterCounter)`
 `
 
 const CharacterContainer = styled.div`
-  width: 100%;
+  ${media.small`
+    width: 90%;
+  `};
+  ${media.medium`
+    width: 100%;
+  `};
 `
 
 const ButtonContainer = styled.div`
@@ -163,7 +168,7 @@ class UsagePeriod extends Component {
     } else {
       const entryIdentifiers = { id, email }
       const updatedEntryData = { rating: selected, comment }
-      updateEntry(entryIdentifiers, updatedEntryData, '/rating')
+      updateEntry(entryIdentifiers, updatedEntryData, 'leave-feedback')
     }
   }
 
