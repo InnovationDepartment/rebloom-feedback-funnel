@@ -58,7 +58,7 @@ export const H4 = styled.h4`
   font-style: italic;
   ${media.small`
     font-size: 14px;
-  `}6
+  `}
   ${media.medium`
     font-size: 24px;
   `};

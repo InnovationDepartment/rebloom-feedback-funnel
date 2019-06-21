@@ -21,12 +21,23 @@ const LogoImage = styled.img`
 
 const StyledH2 = styled(H2)`
   font-weight: 400;
-  margin-bottom: 30px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 66px;
+  `};
 `
 
 const StyledH4 = styled(H4)`
   font-style: normal;
-  margin-top: 20px;
+  font-family: 'Silka-Regular', sans-serif;
+  ${media.small`
+    margin-bottom: 30px;
+  `}
+  ${media.medium`
+    margin-bottom: 66px;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -71,7 +82,6 @@ class Error extends Component {
         <Head title="reBloom" />
         <Container>
           <TextContainer>
-            <LogoImage src="/static/assets/images/logo-white.png" />
             <H1>{header}</H1>
             <StyledH2>{subheader}</StyledH2>
             {body1 && <StyledH4>{body1}</StyledH4>}
@@ -90,7 +100,7 @@ class Error extends Component {
                 and we’ll be sure to take care of you.
               </StyledH4>
             )}
-            <TermsAndConditions />
+            <TermsAndConditions marginTop="120px" />
           </TextContainer>
         </Container>
       </div>

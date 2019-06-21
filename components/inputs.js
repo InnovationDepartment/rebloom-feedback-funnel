@@ -47,13 +47,20 @@ export const TextArea = styled.textarea`
   background-color: white;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  font-size: 24px;
   color: ${props => props.theme.colors.purple};
   border: 2px solid
     ${props => (props.error ? props.theme.colors.errorRed : props.theme.colors.lightGray)};
   border-radius: 10px;
-  width: 95%;
   height: 100px;
-  margin: 38px 0 6px 0;
-  padding: 15px 27px;
+  ${media.small`
+    width: 90%;
+    padding: 10px 10px;
+    font-size: 14px;
+    margin: 15px 0 6px 0;
+  `};
+  ${media.medium`
+    width: 95%;
+    font-size: 24px;
+    margin: 38px 0 6px 0;
+  `};
 `

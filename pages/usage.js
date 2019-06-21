@@ -158,7 +158,7 @@ class UsagePeriod extends Component {
               <ErrorP>{(error && error) || ' '}</ErrorP>
               <PrimaryButton onClick={this.handleSubmit}>NEXT</PrimaryButton>
             </ButtonContainer>
-            <TermsAndConditions topMargin="50px" />
+            <TermsAndConditions marginTop="72px" />
           </TextContainer>
         </Container>
       </Fragment>

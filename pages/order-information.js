@@ -53,6 +53,7 @@ const ContentContainer = styled.div`
   height: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  padding: 0 10px;
 `
 
 const StyledH2 = styled(H2)`
@@ -66,16 +67,26 @@ const StyledH2 = styled(H2)`
 
 const TitleH2 = styled(H2)`
   color: #453b7a;
-  padding: 95px 0 110px 0;
+  ${media.small`
+    padding: 30px 0 30px 0;
+  `};
+  ${media.medium`
+    padding: 95px 0 110px 0;
+  `};
 `
 
 const StyledH3 = styled(H3)`
   color: #453b7a;
   text-align: left;
   font-weight: 400;
-  margin-bottom: 35px;
   font-family: 'Lato';
   font-weight: 700;
+  ${media.small`
+    margin-bottom: 20px;
+  `};
+  ${media.medium`
+    margin-bottom: 35px;
+  `};
 `
 
 const StyledH4 = styled(H4)`
@@ -119,7 +130,12 @@ const ButtonContainer = styled.div`
 const StepImage = styled.img`
   width: 100%;
   height: auto;
-  margin-bottom: 80px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 80px;
+  `};
 `
 
 const StyledLink = styled.span`
@@ -227,11 +243,9 @@ class OrderID extends Component {
         <GreyBackground>
           <ContentContainer>
             <TitleH2 id="how-to-find">How to find your Order ID:</TitleH2>
-            <StyledH3>1. Click orders - start with step 2 and remove step 1.</StyledH3>
-            <StepImage src="static/assets/images/order-id-step-1.png" />
-            <StyledH3>2. Navigate to the appropriate order, click order details.</StyledH3>
+            <StyledH3>1. Navigate to the appropriate order, click order details.</StyledH3>
             <StepImage src="static/assets/images/order-id-step-2.png" />
-            <StyledH3>3. Find the order ID. </StyledH3>
+            <StyledH3>2. Find the order ID. </StyledH3>
             <StepImage src="static/assets/images/order-id-step-3.png" />
           </ContentContainer>
         </GreyBackground>

@@ -5,7 +5,8 @@ import { P } from '../components/text'
 import { media } from '../utils/style-utils'
 
 const TermsLinksContainer = styled(P)`
-  margin-top: ${props => (props.topMargin ? props.topMargin : '0')};
+  margin-top: ${props => (props.marginTop ? props.marginTop : '0')};
+  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : '0')};
   ${media.small`
     font-size: 10px;
     line-height: 10px;

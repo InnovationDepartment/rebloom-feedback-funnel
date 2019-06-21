@@ -16,7 +16,7 @@ const BackgroundContainer = styled.div`
 
 const ContentContainer = styled.div`
   height: 100%;
-  max-width: 1000px;
+  max-width: ${props => (props.maxWidth ? props.maxWidth : '1200px ')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ const ContentContainer = styled.div`
   position: relative;
 
   ${media.small`
-    padding: 0;
+    padding: 0 10px;
     padding-top: ${props => (props.hideLogo ? '40px' : '100px')}
   `};
   ${media.medium`

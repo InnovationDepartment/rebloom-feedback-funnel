@@ -143,7 +143,7 @@ class SignUp extends Component {
                 </form>
               )}
             </Formik>
-            <TermsAndConditions topMargin="50px" />
+            <TermsAndConditions marginTop="50px" />
           </TextContainer>
         </Container>
       </Fragment>
