@@ -17,6 +17,8 @@ export const TextInput = styled.input`
     font-size: 18px;
     min-width: 250px;
     padding: 14px;
+    width: 100%;
+    box-sizing:border-box;
   `}
   ${media.medium`
     font-size: 24px;

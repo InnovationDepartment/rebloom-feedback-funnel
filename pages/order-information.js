@@ -143,7 +143,7 @@ const StyledLink = styled.span`
   text-decoration: underline;
 `
 
-class OrderID extends Component {
+class OrderInformation extends Component {
   componentDidMount() {
     const { entry, userRedirect } = this.props
     // if (!entry || !entry.id) userRedirect('/')
@@ -160,7 +160,7 @@ class OrderID extends Component {
   }
 
   render() {
-    const { loading, entry, error, userRedirect, lookupAmazonOrder } = this.props
+    const { loading, entry, error, lookupAmazonOrder } = this.props
 
     if (loading) return <Spinner />
 
@@ -233,7 +233,7 @@ class OrderID extends Component {
               </Formik>
               <StyledH4>
                 Not an Amazon customer?{'  '}
-                <StyledLink onClick={() => userRedirect('/error', { type: 'invalid' })}>
+                <StyledLink onClick={() => userRedirect('/error', { type: 'qualify' })}>
                   Continue here.
                 </StyledLink>
               </StyledH4>
@@ -262,11 +262,10 @@ const mapState = ({ entries }) => ({
 
 const mapDispatch = {
   clearErrors,
-  userRedirect,
   lookupAmazonOrder,
 }
 
 export default connect(
   mapState,
   mapDispatch
-)(OrderID)
+)(OrderInformation)

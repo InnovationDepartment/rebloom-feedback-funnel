@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -9,7 +9,7 @@ import Container from '../components/Container'
 import TermsAndConditions from '../components/TandC'
 import { TextArea } from '../components/inputs'
 import { PrimaryButton, HiddenButton } from '../components/buttons'
-import { updateEntry } from '../redux/actions/entries'
+import { updateEntry, clearErrors } from '../redux/actions/entries'
 import { H2, H4 } from '../components/text'
 
 const HeaderH2 = styled(H2)`
@@ -108,9 +108,12 @@ const FeedbackContainer = styled.div`
   margin: 0 auto;
 `
 
-class LeaveFeedback extends Component {
+class LeaveFeedback extends PureComponent {
   state = {
     clicked_amazon_link: false,
+  }
+  componentWillUnmount() {
+    this.props.clearErrors()
   }
   submit = () => {
     const { clicked_amazon_link } = this.state
@@ -169,7 +172,7 @@ const mapState = ({ entries }) => ({
   comment: entries.entry.comment,
 })
 
-const mapDispatch = { updateEntry }
+const mapDispatch = { updateEntry, clearErrors }
 
 export default connect(
   mapState,

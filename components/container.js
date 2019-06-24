@@ -24,7 +24,7 @@ const ContentContainer = styled.div`
   position: relative;
 
   ${media.small`
-    padding: 0 10px;
+    padding: ${props => (props.customPadding ? props.customPadding : '0 10px')} ;
     padding-top: ${props => (props.hideLogo ? '40px' : '100px')}
   `};
   ${media.medium`

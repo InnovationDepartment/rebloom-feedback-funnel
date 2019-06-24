@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { differenceInDays } from 'date-fns'
 
 import { media } from '../utils/style-utils'
 import Head from '../components/Head'
@@ -159,7 +160,7 @@ class UsagePeriod extends Component {
     const { selected, comment, commentError } = this.state
     const {
       updateEntry,
-      entry: { id, email },
+      entry: { id, email, purchase_date },
     } = this.props
 
     if (!selected) this.setState({ ratingError: true })
@@ -168,7 +169,25 @@ class UsagePeriod extends Component {
     } else {
       const entryIdentifiers = { id, email }
       const updatedEntryData = { rating: selected, comment }
-      updateEntry(entryIdentifiers, updatedEntryData, 'leave-feedback')
+
+      let nextDestination
+      if (selected === 5) {
+        const daysSincePurchase = differenceInDays(new Date(), purchase_date)
+        if (daysSincePurchase < 7) {
+          nextDestination = 'address-confirmation'
+        } else {
+          nextDestination = 'leave-feedback'
+        }
+      } else if (selected >= 3) {
+        nextDestination = 'address-confirmation'
+      } else {
+        nextDestination = {
+          path: 'error',
+          query: { type: 'negative-experience' },
+        }
+      }
+
+      updateEntry(entryIdentifiers, updatedEntryData, nextDestination)
     }
   }
 

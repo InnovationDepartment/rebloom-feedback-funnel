@@ -10,7 +10,6 @@ export const H1 = styled.h1`
   ${media.small`
     font-size: 28px;
     margin-bottom: 11px;
-
   `};
   ${media.medium`
     font-size: 64px;

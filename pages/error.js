@@ -54,9 +54,10 @@ const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 46px;
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   color: #fff;
   margin: 0;
   cursor: pointer;
@@ -64,7 +65,15 @@ const StyledLink = styled.a`
   text-decoration: none;
 `
 
-const UnderlinedLink = styled(StyledLink)`
+const StyledA = styled.a`
+  color: #fff;
+  margin: 0;
+  cursor: pointer;
+  margin: 0 6px;
+  text-decoration: none;
+`
+
+const UnderlinedLink = styled(StyledA)`
   text-decoration: underline;
 `
 
@@ -73,9 +82,16 @@ class Error extends Component {
     const { router } = this.props
 
     const errorKey = (router && router.query && router.query.type) || 'default'
-    const { header, subheader, buttonCopy, buttonDest, body1, body2, contactInfo } = errorMap[
-      errorKey
-    ]
+    const {
+      header,
+      subheader,
+      buttonCopy,
+      buttonDest,
+      body1,
+      body2,
+      contactInfo,
+      buttonDestInternal,
+    } = errorMap[errorKey]
 
     return (
       <div>
@@ -88,16 +104,22 @@ class Error extends Component {
             {body2 && <StyledH4>{body2}</StyledH4>}
             {buttonCopy && (
               <ButtonContainer>
-                <StyledLink href={buttonDest}>
-                  <PrimaryButton>{buttonCopy}</PrimaryButton>
-                </StyledLink>
+                {buttonDestInternal ? (
+                  <StyledLink href={buttonDest}>
+                    <PrimaryButton>{buttonCopy}</PrimaryButton>
+                  </StyledLink>
+                ) : (
+                  <StyledA href={buttonDest}>
+                    <PrimaryButton>{buttonCopy}</PrimaryButton>
+                  </StyledA>
+                )}
               </ButtonContainer>
             )}
             {contactInfo && (
               <StyledH4>
-                If you think this was an error, please write to our support team at
+                If you think this was an error, please write to our support team at&nbsp;
                 <UnderlinedLink href="mailto:help@rebloom.com">help@rebloom.com</UnderlinedLink>
-                and we’ll be sure to take care of you.
+                &nbsp;and we’ll be sure to take care of you.
               </StyledH4>
             )}
             <TermsAndConditions marginTop="120px" />

@@ -1,6 +1,7 @@
 'use strict'
 const { Op } = require('sequelize')
 const createError = require('http-errors')
+const { createShopifyOrder } = require('../../util/shopify-api')
 
 module.exports = (sequelize, DataTypes) => {
   const Entries = sequelize.define(
@@ -42,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       shipping_city: DataTypes.STRING,
       shipping_state: DataTypes.STRING,
       shipping_zip: DataTypes.STRING,
+      shopify_order_id: DataTypes.STRING,
     },
     {
       underscored: true,
@@ -58,9 +60,7 @@ module.exports = (sequelize, DataTypes) => {
         defaults: entryData,
       })
     } catch (e) {
-      throw new Error(
-        'Uh oh, we had an issue signing you up. Please try again.'
-      )
+      throw new Error('Uh oh, we had an issue signing you up. Please try again.')
     }
   }
 
@@ -68,9 +68,15 @@ module.exports = (sequelize, DataTypes) => {
     try {
       return await this.update(entryData)
     } catch (e) {
-      throw new Error(
-        'Uh oh, we had an issue updating your information. Please try again.'
-      )
+      throw new Error('Uh oh, we had an issue updating your information. Please try again.')
+    }
+  }
+
+  Entries.prototype.generateShopifyOrder = async function(shipping) {
+    try {
+      return createShopifyOrder({ ...shipping, email: this.email })
+    } catch (e) {
+      throw new Error('Uh oh, we had an issue updating your information. Please try again.')
     }
   }
 

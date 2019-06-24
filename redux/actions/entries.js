@@ -35,7 +35,11 @@ export const updateEntry = (entryIdentifiers, entryInfo, dest) => dispatch => {
     }),
   })
     .then(() => {
-      userRedirect(`/${dest}`)
+      if (typeof dest === 'string') {
+        userRedirect(`/${dest}`)
+      } else {
+        userRedirect(`/${dest.path}`, dest.query)
+      }
     })
     .catch(err => {
       const errType = err.response.data.message
@@ -53,6 +57,20 @@ export const lookupAmazonOrder = (entryData, nextQuestion) => dispatch => {
     .then(() => {
       userRedirect(`/${nextQuestion}`)
     })
+    .catch(err => {
+      const errType = err.response.data.message
+      if (errViews.includes(errType)) {
+        userRedirect('/error', { type: errType })
+      }
+    })
+}
+
+export const generateBonusOrder = (entryIdentifiers, shipping) => dispatch => {
+  return dispatch({
+    type: 'GENERATE_BONUS_ORDER',
+    payload: axios.post(`/api/entry/generate-bonus-order`, { entryIdentifiers, shipping }),
+  })
+    .then(() => userRedirect(`/success`))
     .catch(err => {
       const errType = err.response.data.message
       if (errViews.includes(errType)) {

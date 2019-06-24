@@ -15,9 +15,17 @@ const LogoImage = styled.img`
   z-index: 100;
 `
 
-const BottleImage = styled.img`
-  height: 525px;
-  margin: 0 10%;
+const BottleImage = styled.img.attrs(props => ({
+  src: 'static/assets/images/bottle.png',
+}))`
+  ${media.small`
+    display: none;
+  `};
+  ${media.medium`
+    height: 525px;
+    margin: 0 10% 0 10%;
+    display: block;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -48,14 +56,13 @@ const LandingPage = () => (
   <Fragment>
     <Head title="reBloom" />
     <Container>
-      <LogoImage src="/src/assets/images/logo-white.png" />
-      <BottleImage src="/src/assets/images/bottle.png" />
+      <BottleImage src="static/assets/images/bottle.png" />
       <TextContainer>
         <StyledH1>Success!</StyledH1>
         <StyledH3>We told you it would be easy.</StyledH3>
         <SmallerCopy>
-          Your free reBloom is on the way. Look out for a confirmation email
-          with tracking information.
+          Your free reBloom is on the way. Look out for a confirmation email with tracking
+          information.
         </SmallerCopy>
         <SmallerCopy>Sweet dreams.</SmallerCopy>
       </TextContainer>

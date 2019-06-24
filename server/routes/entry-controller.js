@@ -34,13 +34,14 @@ router.post(
       entryInfo,
     } = req.body
 
-    const entry = await Entries.findByPk(1)
-    // const entry = await Entries.findOne({
-    //   where: {
-    //     id: { [Op.eq]: id },
-    //     email: { [Op.eq]: email.toLowerCase() },
-    //   },
-    // })
+    if (!id && !email) throw new createError(400, 'invalid')
+
+    const entry = await Entries.findOne({
+      where: {
+        id: { [Op.eq]: id },
+        email: { [Op.eq]: email.toLowerCase() },
+      },
+    })
 
     // Entry already exists with this email and has already been redeemed
     if (entry.has_redeemed) throw new createError('existing-entry')
@@ -55,7 +56,7 @@ router.post(
   '/lookup-amazon-order',
   asyncWrapper(async (req, res) => {
     const { order_id, id, email } = req.body
-    // if (!id && !email) throw new createError(400, 'invalid')
+    if (!id && !email) throw new createError(400, 'invalid')
 
     // Lookup for Amazon.com orders
     const amazonOrder = await AmazonOrders.findOne({
@@ -75,13 +76,12 @@ router.post(
       throw new createError(400, 'existing-entry')
     }
 
-    const entry = await Entries.findByPk(1)
-    // const entry = await Entries.findOne({
-    //   where: {
-    //     id: { [Op.eq]: id },
-    //     email: { [Op.eq]: email.toLowerCase() },
-    //   },
-    // })
+    const entry = await Entries.findOne({
+      where: {
+        id: { [Op.eq]: id },
+        email: { [Op.eq]: email.toLowerCase() },
+      },
+    })
 
     const updatedEntry = await entry.updateEntry({
       id,
@@ -112,6 +112,53 @@ router.post(
   asyncWrapper(async (req, res) => {
     const order = await createShopifyOrder()
     res.status(200).send(order)
+  })
+)
+
+router.post(
+  '/generate-bonus-order',
+  asyncWrapper(async (req, res) => {
+    const {
+      entryIdentifiers: { id, email },
+      shipping,
+    } = req.body
+    if (!id && !email) throw new createError(400, 'invalid')
+
+    const {
+      first_name: shipping_first_name,
+      last_name: shipping_last_name,
+      address1: shipping_line1,
+      address2: shipping_line2,
+      city: shipping_city,
+      state: shipping_state,
+      zip: shipping_zip,
+    } = shipping
+
+    const entry = await Entries.findOne({
+      where: {
+        id: { [Op.eq]: id },
+        email: { [Op.eq]: email.toLowerCase() },
+      },
+    })
+
+    if (!entry.order_valid) throw new createError(400, 'invalid-order')
+    const shopifyOrder = await entry.generateShopifyOrder({ ...shipping, email })
+
+    const updatedEntryData = {
+      shipping_first_name,
+      shipping_last_name,
+      shipping_line1,
+      shipping_line2,
+      shipping_city,
+      shipping_state,
+      shipping_zip,
+      has_redeemed: true,
+      shopify_order_id: shopifyOrder.id,
+    }
+
+    const updatedEntry = await entry.updateEntry(updatedEntryData)
+
+    res.status(200).send(updatedEntry)
   })
 )
 
