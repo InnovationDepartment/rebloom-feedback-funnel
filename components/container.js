@@ -16,10 +16,10 @@ const BackgroundContainer = styled.div`
 
 const ContentContainer = styled.div`
   height: 100%;
-  max-width: ${props => (props.maxWidth ? props.maxWidth : '1200px ')};
+  max-width: ${props => (props.maxWidth ? props.maxWidth : '1200px')};
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: ${props => (props.alignItems ? props.alignItems : 'center')};
   margin: 0 auto;
   position: relative;
 

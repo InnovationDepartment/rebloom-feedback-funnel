@@ -9,7 +9,7 @@ export default {
     subheader:
       'Unfortunately, you don’t qualify for this offer. In the meantime, get 25% off your next  reBloom order.',
     buttonCopy: 'GET 25% OFF',
-    buttonDest: 'http://www.google.com',
+    buttonDest: 'https://offers.rebloom.com/new-amazon',
     contactInfo: true,
   },
   invalid: {

@@ -21,6 +21,7 @@ const LogoImage = styled.img`
 
 const StyledH2 = styled(H2)`
   font-weight: 400;
+  font-family: 'Silka-Regular';
   ${media.small`
     margin-bottom: 30px;
   `};
@@ -77,6 +78,9 @@ const UnderlinedLink = styled(StyledA)`
   text-decoration: underline;
 `
 
+const ContactInfoDiv = styled.div`
+  max-width: 93%;
+`
 class Error extends Component {
   render() {
     const { router } = this.props
@@ -116,13 +120,15 @@ class Error extends Component {
               </ButtonContainer>
             )}
             {contactInfo && (
-              <StyledH4>
-                If you think this was an error, please write to our support team at&nbsp;
-                <UnderlinedLink href="mailto:help@rebloom.com">help@rebloom.com</UnderlinedLink>
-                &nbsp;and we’ll be sure to take care of you.
-              </StyledH4>
+              <ContactInfoDiv>
+                <StyledH4>
+                  If you think this was an error, please write to our support team at&nbsp;
+                  <UnderlinedLink href="mailto:help@rebloom.com">help@rebloom.com</UnderlinedLink>
+                  &nbsp;and we’ll be sure to take care of you.
+                </StyledH4>
+              </ContactInfoDiv>
             )}
-            <TermsAndConditions marginTop="120px" />
+            <TermsAndConditions marginTop="0" />
           </TextContainer>
         </Container>
       </div>

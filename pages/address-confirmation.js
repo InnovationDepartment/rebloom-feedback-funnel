@@ -24,8 +24,9 @@ const BottleImage = styled.img.attrs(props => ({
     display: none;
   `};
   ${media.medium`
-    height: 525px;
+    height: 650px;
     margin: 0 10% 0 10%;
+    margin-top: 24px;
     display: block;
   `};
 `
@@ -142,7 +143,7 @@ class AddressConfirmation extends PureComponent {
     return (
       <>
         <Head title="reBloom Bonus Offer" />
-        <Container customPadding="0 20px">
+        <Container customPadding="0 20px" alignItems="flex-start">
           <BottleImage />
           <TextContainer>
             <Heading>Address Confirmation</Heading>

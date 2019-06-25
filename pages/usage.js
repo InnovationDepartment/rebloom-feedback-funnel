@@ -139,19 +139,19 @@ class UsagePeriod extends Component {
                 <RadioSelector>
                   <InnerSelector selected={selected === 0} />
                 </RadioSelector>
-                <RadioLabel>Less than a week ago</RadioLabel>
+                <RadioLabel>Less than a week ago.</RadioLabel>
               </StyledRadio>
               <StyledRadio onClick={() => this.onChange(1)}>
                 <RadioSelector>
                   <InnerSelector selected={selected === 1} />
                 </RadioSelector>
-                <RadioLabel>More than a week ago</RadioLabel>
+                <RadioLabel>More than a week ago.</RadioLabel>
               </StyledRadio>
               <StyledRadio onClick={() => this.onChange(2)}>
                 <RadioSelector>
                   <InnerSelector selected={selected === 2} />
                 </RadioSelector>
-                <RadioLabel>More than two weeks ago</RadioLabel>
+                <RadioLabel>More than two weeks ago.</RadioLabel>
               </StyledRadio>
             </ChoicesContainer>
             <ButtonContainer>

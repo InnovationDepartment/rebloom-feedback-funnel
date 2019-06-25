@@ -54,6 +54,9 @@ export const TextArea = styled.textarea`
     ${props => (props.error ? props.theme.colors.errorRed : props.theme.colors.lightGray)};
   border-radius: 10px;
   height: 100px;
+  ::placeholder {
+    color: #a29dbc;
+  }
   ${media.small`
     width: 90%;
     padding: 10px 10px;

@@ -40,6 +40,7 @@ const TextContainer = styled.div`
 
 const StyledH1 = styled(H1)`
   text-align: left;
+  font-family: 'Silka-Bold';
 `
 
 const StyledH3 = styled(H3)`
@@ -50,6 +51,7 @@ const StyledH3 = styled(H3)`
 
 const SmallerCopy = styled(StyledH3)`
   font-size: 32px;
+  font-family: 'Lato';
 `
 
 const LandingPage = () => (

@@ -89,6 +89,7 @@ const CloudContainer = styled.div`
 const CloudLabel = styled(H3)`
   color: ${props => props.theme.colors.purple};
   font-weight: 400;
+  font-family: 'Lato';
 `
 
 const StyledP = styled(P)`
@@ -223,7 +224,7 @@ class UsagePeriod extends Component {
                 ))}
               </SpreadContainer>
               <SpreadContainer>
-                <StyledP>1 = nightmare</StyledP>
+                <StyledP>1 = a nightmare</StyledP>
                 {ratingError && <ErrorP>Please provide a rating!</ErrorP>}
                 <StyledP>5 = a dream</StyledP>
               </SpreadContainer>

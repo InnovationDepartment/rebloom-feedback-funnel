@@ -106,7 +106,7 @@ const LandingPage = () => (
         </Link>
         <>
           <TermsText>
-            This offer is valid for past Amazon customers only. To qualify for a free seven-pack of
+            This offer is valid for past Amazon customers only. To qualify for a free 7-Pack of
             reBloom, you must provide your Order ID as proof of purchase. Order must have been
             purchased with no discount code greater than 30%. Valid in the US only. Limit one per
             household.
