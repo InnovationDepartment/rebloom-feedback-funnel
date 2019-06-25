@@ -139,9 +139,10 @@ class LeaveFeedback extends PureComponent {
             <StyledH2>It's customers like you that help us grow our business</StyledH2>
             <FeedbackContainer>
               <StyledH4>
-                Could you please post your feedback on Amazon to share with potential new customers?
+                We’d love if you could post your feedback on Amazon to share with potential new
+                customers!
               </StyledH4>
-              <CopyH4>Copy and paste what you wrote:</CopyH4>
+              <CopyH4>To share your review, copy and paste your feedback below.</CopyH4>
               <TextArea value={comment} disabled />
               <ButtonContainer>
                 <A
