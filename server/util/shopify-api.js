@@ -31,7 +31,7 @@ const createShopifyOrder = async data => {
       country_code: 'US',
     },
     tags: 'bonus-bottle',
-    test: process.env.NODE_ENV !== 'production',
+    test: process.env.APP_ENV !== 'production',
   })
 }
 
