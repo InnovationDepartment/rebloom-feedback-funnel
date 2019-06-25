@@ -25,7 +25,7 @@ const BottleImage = styled.img.attrs(props => ({
   `};
   ${media.medium`
     height: 650px;
-    margin: 0 10% 0 10%;
+    margin: 0 15% 0 10%;
     margin-top: 24px;
     display: block;
   `};
