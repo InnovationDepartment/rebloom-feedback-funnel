@@ -1,7 +1,7 @@
 export const stateAbbreviations = [
   {
     name: '', //for default initial value purposes in Select dropdown
-    abbreviation: '',
+    abbreviation: 'Select State',
   },
   {
     name: 'Alabama',

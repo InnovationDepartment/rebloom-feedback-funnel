@@ -9,6 +9,7 @@ import Container from '../components/Container'
 import TermsAndConditions from '../components/TandC'
 import { PrimaryButton } from '../components/buttons'
 import { TextInput, TextInputError } from '../components/inputs'
+import { Select } from '../components/select'
 import { H1, H3, P, ErrorP } from '../components/text'
 import { stateAbbreviations } from '../utils/address-utils'
 import { generateBonusOrder, clearErrors } from '../redux/actions/entries'
@@ -124,6 +125,12 @@ const StateZipRight = styled.div`
   padding-left: 10px;
 `
 
+const StyledOption = styled.option`
+  font-family: 'HarrietDisplay-Light';
+  padding-left: 12px !important;
+  color: grey !important;
+`
+
 class AddressConfirmation extends PureComponent {
   componentWillUnmount() {
     this.props.clearErrors()
@@ -165,7 +172,7 @@ class AddressConfirmation extends PureComponent {
                 if (!last_name) errors.last_name = 'Required field'
                 if (!address1) errors.address1 = 'Required field'
                 if (!city) errors.city = 'Required field'
-                if (!state) errors.state = 'Required field'
+                if (!state || state === 'Select State') errors.state = 'Required field'
                 if (!zip) errors.zip = 'Required field'
                 if (zip.length !== 5 || !isNumber(zip)) errors.zip = 'Must be 5 digit zip code'
 
@@ -262,16 +269,19 @@ class AddressConfirmation extends PureComponent {
                   </div>
                   <StateZipDiv>
                     <StateZipLeft>
-                      <SmallTextInput
-                        type="text"
+                      <Select
                         name="state"
-                        error={touched.state && errors.state}
+                        error={touched.address && touched.address.state && errors.state}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.state}
-                        placeholder="State"
-                        maxLength="2"
-                      />
+                      >
+                        {stateAbbreviations.map(data => (
+                          <StyledOption key={data.abbreviation} value={data.abbreviation}>
+                            {data.abbreviation}
+                          </StyledOption>
+                        ))}
+                      </Select>
                       <TextInputError>
                         {(errors.state && touched.state && errors.state) || ' '}
                       </TextInputError>

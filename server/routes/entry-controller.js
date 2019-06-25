@@ -5,7 +5,8 @@ const createError = require('http-errors')
 
 const asyncWrapper = require('../middleware/async-wrapper')
 const { Entries, AmazonOrders } = require('../db/models')
-const { createShopifyOrder } = require('../util/shopify-api')
+const { reviewRequest, reviewReminder } = require('../emails/mandrill')
+const { differenceInDays } = require('date-fns')
 
 router.post(
   '/new-entry',
@@ -107,13 +108,13 @@ router.post(
   })
 )
 
-router.post(
-  '/process-order',
-  asyncWrapper(async (req, res) => {
-    const order = await createShopifyOrder()
-    res.status(200).send(order)
-  })
-)
+// router.post(
+//   '/process-order',
+//   asyncWrapper(async (req, res) => {
+//     const order = await createShopifyOrder()
+//     res.status(200).send(order)
+//   })
+// )
 
 router.post(
   '/generate-bonus-order',
@@ -143,6 +144,14 @@ router.post(
 
     if (!entry.order_valid) throw new createError(400, 'invalid-order')
     const shopifyOrder = await entry.generateShopifyOrder({ ...shipping, email })
+    const daysSincePurchase = differenceInDays(new Date(), entry.purchase_date)
+    if (entry.rating === 5) {
+      if (daysSincePurchase < 7) {
+        await reviewRequest({ email, comment: entry.comment })
+      } else {
+        await reviewReminder({ email, comment: entry.comment })
+      }
+    }
 
     const updatedEntryData = {
       shipping_first_name,
