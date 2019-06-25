@@ -26,12 +26,16 @@ const TermsLinks = styled.span`
 
 const TermsAndConditions = props => (
   <TermsLinksContainer {...props}>
-    <Link href="/terms-and-conditions">
-      <TermsLinks>Terms and Conditions </TermsLinks>
+    <Link href="/terms-and-conditions" target="_blank">
+      <a target="_blank">
+        <TermsLinks>Terms and Conditions </TermsLinks>
+      </a>
     </Link>
     <TermsLinks>&nbsp;&nbsp;|&nbsp;&nbsp;</TermsLinks>
-    <Link href="/privacy-policy">
-      <TermsLinks>Privacy Policy </TermsLinks>
+    <Link href="/privacy-policy" target="_blank">
+      <a target="_blank">
+        <TermsLinks>Privacy Policy </TermsLinks>
+      </a>
     </Link>
   </TermsLinksContainer>
 )

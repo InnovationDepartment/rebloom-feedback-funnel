@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Silka-Medium';
     src: url('/static/assets/fonts/Silka-Medium.otf');
   }
+  a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+}
 `
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
