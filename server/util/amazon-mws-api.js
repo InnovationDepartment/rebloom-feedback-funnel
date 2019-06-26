@@ -93,8 +93,8 @@ const requestAmazonReport = async (startDate, endDate) => {
     Action: 'RequestReport',
     Version: '2009-01-01',
     ReportType: '_GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_',
-    StartDate: startDate.toISOString(),
-    EndDate: endDate.toISOString(),
+    StartDate: startDate,
+    EndDate: endDate,
     Timestamp: new Date().toISOString(),
   }
   const uri = '/Reports/2009-01-01'
