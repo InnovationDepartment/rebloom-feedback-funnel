@@ -16,15 +16,15 @@ const BackgroundContainer = styled.div`
 
 const ContentContainer = styled.div`
   height: 100%;
-  max-width: 1000px;
+  max-width: ${props => (props.maxWidth ? props.maxWidth : '1200px')};
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: ${props => (props.alignItems ? props.alignItems : 'center')};
   margin: 0 auto;
   position: relative;
 
   ${media.small`
-    padding: 0;
+    padding: ${props => (props.customPadding ? props.customPadding : '0 10px')} ;
     padding-top: ${props => (props.hideLogo ? '40px' : '100px')}
   `};
   ${media.medium`
@@ -37,7 +37,7 @@ const LogoImage = styled.img`
   position: absolute;
   ${media.small`
     height: 32px;
-    top: 32px;
+    top: 35px;
   `};
   ${media.medium`
     height: 40px;

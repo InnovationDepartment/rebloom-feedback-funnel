@@ -23,6 +23,11 @@ export const PrimaryButton = styled.button`
     border-radius: 25px;
     font-size: 30px;
     width: 450px;
-    margin: 20px 0;
   `}
+`
+
+export const HiddenButton = styled(PrimaryButton)`
+  background-color: ${props => (props.show ? props.theme.colors.babyBlue : '#524b8a')};
+  border: ${props => (props.show ? `1px solid ${props.theme.colors.lightGray}` : 'none')};
+  font-family: ${props => (props.show ? 'Silka-Bold' : 'Silka-Regular')};
 `

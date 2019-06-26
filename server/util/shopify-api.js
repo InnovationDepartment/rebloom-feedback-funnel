@@ -6,9 +6,10 @@ const shopify = new Shopify({
   password: process.env.SHOPIFY_PASSWORD,
 })
 
-const createShopifyOrder = async details => {
-  const order = await shopify.order.create({
-    email: 'phil+8882@innovationdept.com',
+const createShopifyOrder = async data => {
+  const { email, address1, address2, first_name, last_name, city, state: province_code, zip } = data
+  return shopify.order.create({
+    email,
     financial_status: 'paid',
     send_receipt: true,
     send_fulfillment_receipt: true,
@@ -19,20 +20,19 @@ const createShopifyOrder = async details => {
         requires_shipping: true,
       },
     ],
-    note: 'Bonus Bottle',
     shipping_address: {
-      first_name: 'Phil',
-      last_name: 'Ng',
-      address1: '10210 66th Rd',
-      address2: 'Apt 1E',
-      city: 'Forest Hills',
-      province_code: 'NY',
-      zip: '11375',
+      first_name,
+      last_name,
+      address1,
+      address2,
+      city,
+      province_code,
+      zip,
       country_code: 'US',
     },
-    test: process.env.NODE_ENV !== 'production',
+    tags: 'bonus-bottle',
+    test: process.env.APP_ENV !== 'production',
   })
-  return order
 }
 
 module.exports = {

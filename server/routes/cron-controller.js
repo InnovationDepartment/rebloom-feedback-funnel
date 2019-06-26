@@ -10,7 +10,8 @@ const { fetchAmazonOrderData, requestAmazonReport } = require('./../util/amazon-
 router.post(
   '/request-amazon-report',
   asyncWrapper(async (req, res) => {
-    const { startDate = subHours(new Date(), 5), endDate = addHours(new Date(), 1) } = req.body
+    const { startDate = subHours(new Date(), 480), endDate = addHours(new Date(), 1) } = req.body
+    // const { startDate = subHours(new Date(), 5), endDate = addHours(new Date(), 1) } = req.body
     await requestAmazonReport(startDate, endDate)
     res.status(200).send()
   })

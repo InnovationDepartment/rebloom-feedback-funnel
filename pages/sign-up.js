@@ -16,7 +16,12 @@ import { H2, P, ErrorP } from '../components/text'
 import { clearErrors, createNewEntry } from '../redux/actions/entries'
 
 const StyledH2 = styled(H2)`
-  margin-bottom: 50px;
+  ${media.small`
+    margin-bottom: 37px;
+  `};
+  ${media.medium`
+    margin-bottom: 50px;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -35,19 +40,8 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 31px;
 `
-
-// const TextInputError = styled(P)`
-//   margin: 6px 0 0 0;
-//   height: 16px;
-//   font-style: normal;
-//   ${media.small`
-//     font-size: 10px;
-//   `};
-//   ${media.medium`
-//     font-size: 12px;
-//   `};
-// `
 
 class SignUp extends Component {
   componentWillUnmount() {
@@ -149,7 +143,7 @@ class SignUp extends Component {
                 </form>
               )}
             </Formik>
-            <TermsAndConditions />
+            <TermsAndConditions marginTop="50px" />
           </TextContainer>
         </Container>
       </Fragment>

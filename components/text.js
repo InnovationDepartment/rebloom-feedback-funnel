@@ -10,7 +10,6 @@ export const H1 = styled.h1`
   ${media.small`
     font-size: 28px;
     margin-bottom: 11px;
-
   `};
   ${media.medium`
     font-size: 64px;
@@ -53,10 +52,15 @@ export const H4 = styled.h4`
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   color: #fff;
-  font-size: 24px;
   margin: 0;
   text-align: center;
   font-style: italic;
+  ${media.small`
+    font-size: 14px;
+  `}
+  ${media.medium`
+    font-size: 24px;
+  `};
 `
 
 export const P = styled.p`

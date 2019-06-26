@@ -32,7 +32,7 @@ const DesktopBottleImage = styled(BottleImage)`
 const MobileBottleImage = styled(BottleImage)`
   ${media.small`
     display: block;
-    margin-bottom: 42px;
+    margin: 25px 0 42px 0;
   `};
   ${media.medium`
     display: none;
@@ -88,7 +88,7 @@ const CTAButton = styled(PrimaryButton)`
     margin-bottom: 36px
   `};
   ${media.medium`
-    margin-bottom: 22px;
+    margin: 50px 0;
   `};
 `
 
@@ -99,25 +99,29 @@ const LandingPage = () => (
       <DesktopBottleImage />
       <TextContainer>
         <H1>Free 7-Pack of reBloom</H1>
-        <SubHeading>Seriously, no strings attached.</SubHeading>
+        <H3>Seriously, no strings attached.</H3>
         <MobileBottleImage />
         <Link href="/sign-up">
           <CTAButton>I WANT FREE REBLOOM</CTAButton>
         </Link>
         <>
           <TermsText>
-            This offer is valid for past Amazon customers only. To qualify for a free seven-pack of
+            This offer is valid for past Amazon customers only. To qualify for a free 7-Pack of
             reBloom, you must provide your Order ID as proof of purchase. Order must have been
             purchased with no discount code greater than 30%. Valid in the US only. Limit one per
             household.
           </TermsText>
           <TermsLinksContainer>
             <Link href="/terms-and-conditions">
-              <TermsLinks>Terms and Conditions </TermsLinks>
+              <a target="_blank">
+                <TermsLinks>Terms and Conditions </TermsLinks>
+              </a>
             </Link>
             <TermsLinks>&nbsp;&nbsp;|&nbsp;&nbsp;</TermsLinks>
-            <Link href="/privacy-policy">
-              <TermsLinks>Privacy Policy </TermsLinks>
+            <Link href="/privacy-policy" target="_blank">
+              <a target="_blank">
+                <TermsLinks>Privacy Policy </TermsLinks>
+              </a>
             </Link>
           </TermsLinksContainer>
         </>

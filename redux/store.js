@@ -9,7 +9,7 @@ import mainReducer from './reducers'
 function initializeStore() {
   const promise = createPromise({ types: { fulfilled: 'success' } })
   let middleware = [thunk, promise]
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.APP_ENV !== 'production') {
     const logger = require('redux-logger').default
     middleware = [...middleware, logger]
   }

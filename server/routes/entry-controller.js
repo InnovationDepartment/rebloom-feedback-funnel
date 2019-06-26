@@ -4,8 +4,9 @@ const { Op } = require('sequelize')
 const createError = require('http-errors')
 
 const asyncWrapper = require('../middleware/async-wrapper')
-const { Entries } = require('../db/models')
-const { createShopifyOrder } = require('../util/shopify-api')
+const { Entries, AmazonOrders } = require('../db/models')
+const { reviewRequest, reviewReminder } = require('../emails/mandrill')
+const { differenceInDays } = require('date-fns')
 
 router.post(
   '/new-entry',
@@ -34,6 +35,8 @@ router.post(
       entryInfo,
     } = req.body
 
+    if (!id && !email) throw new createError(400, 'invalid')
+
     const entry = await Entries.findOne({
       where: {
         id: { [Op.eq]: id },
@@ -51,9 +54,10 @@ router.post(
 )
 
 router.post(
-  '/look-up-order',
+  '/lookup-amazon-order',
   asyncWrapper(async (req, res) => {
-    const { order_id } = req.body
+    const { order_id, id, email } = req.body
+    if (!id && !email) throw new createError(400, 'invalid')
 
     // Lookup for Amazon.com orders
     const amazonOrder = await AmazonOrders.findOne({
@@ -73,8 +77,6 @@ router.post(
       throw new createError(400, 'existing-entry')
     }
 
-    const formattedItems = amazonOrder.items_asins.split(',')
-
     const entry = await Entries.findOne({
       where: {
         id: { [Op.eq]: id },
@@ -82,12 +84,9 @@ router.post(
       },
     })
 
-    const bonus_product = formattedItems.length === 1 ? formattedItems[0] : null
     const updatedEntry = await entry.updateEntry({
       id,
       order_id,
-      bonus_product,
-      items: formattedItems,
       purchase_date: amazonOrder.order_purchase_date,
       order_valid: true,
     })
@@ -109,11 +108,66 @@ router.post(
   })
 )
 
+// router.post(
+//   '/process-order',
+//   asyncWrapper(async (req, res) => {
+//     const order = await createShopifyOrder()
+//     res.status(200).send(order)
+//   })
+// )
+
 router.post(
-  '/process-order',
+  '/generate-bonus-order',
   asyncWrapper(async (req, res) => {
-    const order = await createShopifyOrder()
-    res.status(200).send(order)
+    const {
+      entryIdentifiers: { id, email },
+      shipping,
+    } = req.body
+    if (!id && !email) throw new createError(400, 'invalid')
+
+    const {
+      first_name: shipping_first_name,
+      last_name: shipping_last_name,
+      address1: shipping_line1,
+      address2: shipping_line2,
+      city: shipping_city,
+      state: shipping_state,
+      zip: shipping_zip,
+    } = shipping
+
+    const entry = await Entries.findOne({
+      where: {
+        id: { [Op.eq]: id },
+        email: { [Op.eq]: email.toLowerCase() },
+      },
+    })
+
+    if (!entry.order_valid) throw new createError(400, 'invalid-order')
+    const shopifyOrder = await entry.generateShopifyOrder({ ...shipping, email })
+    const daysSincePurchase = differenceInDays(new Date(), entry.purchase_date)
+    if (entry.rating === 5) {
+      if (daysSincePurchase < 7) {
+        await reviewRequest({ email, comment: entry.comment })
+      } else {
+        await reviewReminder({ email, comment: entry.comment })
+      }
+    }
+
+    const updatedEntryData = {
+      shipping_first_name,
+      shipping_last_name,
+      shipping_line1,
+      shipping_line2,
+      shipping_city,
+      shipping_state,
+      shipping_zip,
+      has_redeemed: true,
+      shopify_order_id: shopifyOrder.id,
+    }
+
+    const updatedEntry = await entry.updateEntry(updatedEntryData)
+
+    res.status(200).send(updatedEntry)
   })
 )
 

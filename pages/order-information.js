@@ -9,14 +9,10 @@ import { media } from '../utils/style-utils'
 import Head from '../components/Head'
 import Spinner from '../components/Spinner'
 import { PrimaryButton } from '../components/buttons'
-import { TextInput } from '../components/inputs'
+import { TextInput, TextInputError } from '../components/inputs'
 import { H2, H3, H4, P, ErrorP } from '../components/text'
 
-import {
-  clearErrors,
-  updateEntry,
-  userRedirect,
-} from '../redux/actions/entries'
+import { clearErrors, lookupAmazonOrder, userRedirect } from '../redux/actions/entries'
 
 const TopImageBackground = styled.div`
   background-image: url('static/assets/images/background.jpg');
@@ -26,16 +22,26 @@ const TopImageBackground = styled.div`
   background-position-y: center;
   position: relative;
   cursor: default;
-  height: 750px;
   width: 100%;
+  ${media.small`
+    height: 100vh;
+  `};
+  ${media.medium`
+    height: 740px;
+  `};
 `
 
 const LogoImage = styled.img`
-  height: 40px;
   width: auto;
-  margin: 37px 0 53px 0;
   position: absolute;
-  top: 10px;
+  ${media.small`
+    height: 32px;
+    top: 35px;
+  `};
+  ${media.medium`
+    height: 40px;
+    top: 37px;
+  `};
 `
 
 const GreyBackground = styled.div`
@@ -47,32 +53,54 @@ const ContentContainer = styled.div`
   height: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  padding: 0 10px;
 `
 
 const StyledH2 = styled(H2)`
-  margin-bottom: 50px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 50px;
+  `};
 `
 
 const TitleH2 = styled(H2)`
   color: #453b7a;
-  padding: 100px 0;
+  ${media.small`
+    padding: 30px 0 30px 0;
+  `};
+  ${media.medium`
+    padding: 95px 0 110px 0;
+  `};
 `
 
 const StyledH3 = styled(H3)`
   color: #453b7a;
   text-align: left;
   font-weight: 400;
-  margin-bottom: 50px;
+  font-family: 'Lato';
+  font-weight: 700;
+  ${media.small`
+    margin-bottom: 20px;
+  `};
+  ${media.medium`
+    margin-bottom: 35px;
+  `};
 `
 
 const StyledH4 = styled(H4)`
   font-style: normal;
-  margin-top: 20px;
 `
 
 const StyledH4Italic = styled(H4)`
   font-style: italic;
-  margin-bottom: 50px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 50px;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -83,6 +111,7 @@ const TextContainer = styled.div`
   color: #fff;
   height: 100%;
   margin: 0 auto;
+  padding: 0 10px;
 `
 
 const ButtonContainer = styled.div`
@@ -90,19 +119,23 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
-const StyledErrorP = styled(P)`
-  font-size: 12px;
-  margin: 6px 0 0 0;
-  height: 16px;
-  font-style: normal;
+  ${media.small`
+    margin: 25px 0 53px 0;
+  `}
+  ${media.medium`
+    margin: 25px 0 53px 0;
+  `}
 `
 
 const StepImage = styled.img`
   width: 100%;
   height: auto;
-  margin-bottom: 80px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 80px;
+  `};
 `
 
 const StyledLink = styled.span`
@@ -110,7 +143,7 @@ const StyledLink = styled.span`
   text-decoration: underline;
 `
 
-class OrderID extends Component {
+class OrderInformation extends Component {
   componentDidMount() {
     const { entry, userRedirect } = this.props
     // if (!entry || !entry.id) userRedirect('/')
@@ -120,8 +153,14 @@ class OrderID extends Component {
     this.props.clearErrors()
   }
 
+  scrollToInstructions = () => {
+    document.querySelector('#how-to-find').scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
+
   render() {
-    const { loading, entry, error, userRedirect } = this.props
+    const { loading, entry, error, lookupAmazonOrder } = this.props
 
     if (loading) return <Spinner />
 
@@ -132,12 +171,10 @@ class OrderID extends Component {
           <ContentContainer>
             <TextContainer>
               <LogoImage src="static/assets/images/logo-white.png" />
-              <StyledH2>
-                Please find your Amazon Order ID from your reBloom purchase.
-              </StyledH2>
+              <StyledH2>Please find your Amazon Order ID from your reBloom purchase.</StyledH2>
               <StyledH4Italic>
-                Enter your Order ID with all of the dashes. Need help? See
-                below.
+                Enter your Order ID with all of the dashes. Need help?{' '}
+                <StyledLink onClick={this.scrollToInstructions}>See below</StyledLink>.
               </StyledH4Italic>
               <Formik
                 initialValues={{
@@ -150,12 +187,14 @@ class OrderID extends Component {
                 }}
                 onSubmit={(values, { setSubmitting }) => {
                   const {
-                    updateEntry,
                     entry: { id, email },
                   } = this.props
-
-                  const entryIdentifiers = { id, email }
-                  updateEntry(entryIdentifiers, values, 'usage')
+                  const entryData = {
+                    id,
+                    email,
+                    order_id: values.order_id,
+                  }
+                  lookupAmazonOrder(entryData, 'usage')
                   setSubmitting(false)
                 }}
               >
@@ -179,12 +218,9 @@ class OrderID extends Component {
                         value={values.order_id}
                         placeholder="###-#######-#######"
                       />
-                      <StyledErrorP>
-                        {(errors.order_id &&
-                          touched.order_id &&
-                          errors.order_id) ||
-                          ' '}
-                      </StyledErrorP>
+                      <TextInputError>
+                        {(errors.order_id && touched.order_id && errors.order_id) || ' '}
+                      </TextInputError>
                     </div>
                     <ButtonContainer>
                       <ErrorP>{(error && error) || ' '}</ErrorP>
@@ -197,9 +233,7 @@ class OrderID extends Component {
               </Formik>
               <StyledH4>
                 Not an Amazon customer?{'  '}
-                <StyledLink
-                  onClick={() => userRedirect('/error', { type: 'invalid' })}
-                >
+                <StyledLink onClick={() => userRedirect('/error', { type: 'qualify' })}>
                   Continue here.
                 </StyledLink>
               </StyledH4>
@@ -208,16 +242,10 @@ class OrderID extends Component {
         </TopImageBackground>
         <GreyBackground>
           <ContentContainer>
-            <TitleH2>How to find your Order ID:</TitleH2>
-            <StyledH3>
-              1. Click orders - start with step 2 and remove step 1.
-            </StyledH3>
-            <StepImage src="static/assets/images/order-id-step-1.png" />
-            <StyledH3>
-              2. Navigate to the appropriate order, click order details.
-            </StyledH3>
+            <TitleH2 id="how-to-find">How to find your Order ID:</TitleH2>
+            <StyledH3>1. Navigate to the appropriate order, click order details.</StyledH3>
             <StepImage src="static/assets/images/order-id-step-2.png" />
-            <StyledH3>3. Find the order ID. </StyledH3>
+            <StyledH3>2. Find the order ID. </StyledH3>
             <StepImage src="static/assets/images/order-id-step-3.png" />
           </ContentContainer>
         </GreyBackground>
@@ -234,11 +262,10 @@ const mapState = ({ entries }) => ({
 
 const mapDispatch = {
   clearErrors,
-  updateEntry,
-  userRedirect,
+  lookupAmazonOrder,
 }
 
 export default connect(
   mapState,
   mapDispatch
-)(OrderID)
+)(OrderInformation)

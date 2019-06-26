@@ -15,9 +15,17 @@ const LogoImage = styled.img`
   z-index: 100;
 `
 
-const BottleImage = styled.img`
-  height: 525px;
-  margin: 0 10%;
+const BottleImage = styled.img.attrs(props => ({
+  src: 'static/assets/images/bottle.png',
+}))`
+  ${media.small`
+    display: none;
+  `};
+  ${media.medium`
+    height: 525px;
+    margin: 0 10% 0 10%;
+    display: block;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -32,6 +40,8 @@ const TextContainer = styled.div`
 
 const StyledH1 = styled(H1)`
   text-align: left;
+  font-family: 'Silka-Bold';
+  font-weight: 400;
 `
 
 const StyledH3 = styled(H3)`
@@ -42,20 +52,20 @@ const StyledH3 = styled(H3)`
 
 const SmallerCopy = styled(StyledH3)`
   font-size: 32px;
+  font-family: 'Lato';
 `
 
 const LandingPage = () => (
   <Fragment>
     <Head title="reBloom" />
     <Container>
-      <LogoImage src="/src/assets/images/logo-white.png" />
-      <BottleImage src="/src/assets/images/bottle.png" />
+      <BottleImage src="static/assets/images/bottle.png" />
       <TextContainer>
         <StyledH1>Success!</StyledH1>
         <StyledH3>We told you it would be easy.</StyledH3>
         <SmallerCopy>
-          Your free reBloom is on the way. Look out for a confirmation email
-          with tracking information.
+          Your free reBloom is on the way. Look out for a confirmation email with tracking
+          information.
         </SmallerCopy>
         <SmallerCopy>Sweet dreams.</SmallerCopy>
       </TextContainer>

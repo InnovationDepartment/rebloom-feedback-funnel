@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { differenceInDays } from 'date-fns'
 
 import { media } from '../utils/style-utils'
 import Head from '../components/Head'
@@ -11,14 +12,24 @@ import { PrimaryButton } from '../components/buttons'
 import { TextArea } from '../components/inputs'
 import { H2, H3, P, ErrorP } from '../components/text'
 
-import {
-  clearErrors,
-  updateEntry,
-  userRedirect,
-} from '../redux/actions/entries'
+import { clearErrors, updateEntry, userRedirect } from '../redux/actions/entries'
 
 const StyledH2 = styled(H2)`
-  margin-bottom: 50px;
+  ${media.small`
+    margin-bottom: 40px;
+  `};
+  ${media.medium`
+    margin-bottom: 50px;
+  `};
+`
+
+const StyledH3 = styled(H3)`
+  ${media.small`
+    font-size: 16px;
+  `};
+  ${media.medium`
+    font-size: 30px;
+  `};
 `
 
 const TextContainer = styled.div`
@@ -32,10 +43,16 @@ const TextContainer = styled.div`
 
 const ChoicesContainer = styled.div`
   width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: space-between;
-  margin-bottom: 60px;
+  ${media.small`
+    margin-bottom: 30px;
+  `};
+  ${media.medium`
+    margin-bottom: 60px;
+  `};
 `
 
 const SpreadContainer = styled.div`
@@ -46,21 +63,33 @@ const SpreadContainer = styled.div`
 `
 
 const CloudContainer = styled.div`
-  background-color: #fff;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-image: ${props =>
+    props.selected
+      ? `url('static/assets/images/cloud-gold.png')`
+      : `url('static/assets/images/cloud.png')`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 18%;
-  padding: 20px 0;
   margin-bottom: 12px;
-  border: 5px solid
-    ${props => (props.selected ? props.theme.colors.yellow : 'transparent')};
+  ${media.small`
+    width: 20%;
+    padding: 10px 0;
+  `};
+  ${media.medium`
+    width: 15%;
+    padding: 40px 0;
+  `};
 `
 
 const CloudLabel = styled(H3)`
   color: ${props => props.theme.colors.purple};
   font-weight: 400;
+  font-family: 'Lato';
 `
 
 const StyledP = styled(P)`
@@ -73,10 +102,17 @@ const CharacterCounter = styled(ErrorP)`
   color: ${props => (props.error ? props.theme.colors.errorRed : 'white')};
 `
 
+const CharacterCounterError = styled(CharacterCounter)`
+  color: ${props => props.theme.colors.errorRed};
+`
+
 const CharacterContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
+  ${media.small`
+    width: 90%;
+  `};
+  ${media.medium`
+    width: 100%;
+  `};
 `
 
 const ButtonContainer = styled.div`
@@ -84,6 +120,12 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${media.small`
+    margin-top: 15px;
+  `};
+  ${media.medium`
+    margin-top: 32px;
+  `};
 `
 
 class UsagePeriod extends Component {
@@ -119,15 +161,35 @@ class UsagePeriod extends Component {
     const { selected, comment, commentError } = this.state
     const {
       updateEntry,
-      entry: { id, email },
+      entry: { id, email, purchase_date },
     } = this.props
 
     if (!selected) this.setState({ ratingError: true })
-    if (comment.length < 50) this.setState({ commentError: true })
+    if (comment.length < 50) {
+      this.setState({ commentError: true })
+    } else {
+      const entryIdentifiers = { id, email }
+      const updatedEntryData = { rating: selected, comment }
 
-    const entryIdentifiers = { id, email }
-    const updatedEntryData = { rating: selected, comment }
-    updateEntry(entryIdentifiers, updatedEntryData, '/rating')
+      let nextDestination
+      if (selected === 5) {
+        const daysSincePurchase = differenceInDays(new Date(), purchase_date)
+        if (daysSincePurchase < 7) {
+          nextDestination = 'address-confirmation'
+        } else {
+          nextDestination = 'leave-feedback'
+        }
+      } else if (selected >= 3) {
+        nextDestination = 'address-confirmation'
+      } else {
+        nextDestination = {
+          path: 'error',
+          query: { type: 'negative-experience' },
+        }
+      }
+
+      updateEntry(entryIdentifiers, updatedEntryData, nextDestination)
+    }
   }
 
   render() {
@@ -146,11 +208,9 @@ class UsagePeriod extends Component {
     return (
       <Fragment>
         <Head title="reBloom - Bonus Offer" />
-        <Container>
+        <Container maxWidth="1000px">
           <TextContainer>
-            <StyledH2>
-              How would you rate your experience with reBloom?
-            </StyledH2>
+            <StyledH2>How would you rate your experience with reBloom?</StyledH2>
             <ChoicesContainer>
               <SpreadContainer>
                 {ratingChoices.map(rating => (
@@ -164,15 +224,14 @@ class UsagePeriod extends Component {
                 ))}
               </SpreadContainer>
               <SpreadContainer>
-                <StyledP>1 = nightmare</StyledP>
+                <StyledP>1 = a nightmare</StyledP>
                 {ratingError && <ErrorP>Please provide a rating!</ErrorP>}
                 <StyledP>5 = a dream</StyledP>
               </SpreadContainer>
             </ChoicesContainer>
-            <H3>
-              Can you tell us a bit more about why you bought reBloom and how it
-              worked for you?
-            </H3>
+            <StyledH3>
+              Can you tell us a bit more about why you bought reBloom and how it worked for you?
+            </StyledH3>
             <TextArea
               placeholder="Share your thoughts (and dreams), don’t be shy."
               onChange={this.handleChange}
@@ -180,20 +239,16 @@ class UsagePeriod extends Component {
               value={entry.comment && !comment ? entry.comment : comment}
             />
             <CharacterContainer>
-              {!commentError && (
-                <CharacterCounter>
-                  Required Characters: {Math.max(commentChars, 0)}
-                </CharacterCounter>
-              )}
+              <CharacterCounter>Required Characters: {Math.max(commentChars, 0)}</CharacterCounter>
               {commentError && (
-                <ErrorP>{requiredChars} characters minimum</ErrorP>
+                <CharacterCounterError>{requiredChars} characters minimum</CharacterCounterError>
               )}
             </CharacterContainer>
             <ButtonContainer>
               <ErrorP>{(error && error) || ' '}</ErrorP>
               <PrimaryButton onClick={this.handleSubmit}>NEXT</PrimaryButton>
             </ButtonContainer>
-            <TermsAndConditions />
+            <TermsAndConditions marginTop="50px" marginBottom="30px" />
           </TextContainer>
         </Container>
       </Fragment>
