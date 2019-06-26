@@ -131,7 +131,7 @@ const ButtonContainer = styled.div`
 class UsagePeriod extends Component {
   state = {
     selected: this.props.entry.rating || null,
-    comment: '',
+    comment: this.props.entry.comment || '',
     ratingError: null,
   }
 

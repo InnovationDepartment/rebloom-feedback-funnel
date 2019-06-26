@@ -106,6 +106,27 @@ const FeedbackContainer = styled.div`
   align-items: center;
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 10px;
+`
+
+const CommentDiv = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  color: ${props => props.theme.colors.purple};
+  font-family: 'Lato';
+  ${media.small`
+    width: 100%;
+    font-size: 14px;
+    margin: 10px 0 6px 0;
+  `};
+  ${media.medium`
+    width: 100%;
+    font-size: 24px;
+    margin: 10px 0 6px 0;
+  `};
 `
 
 class LeaveFeedback extends PureComponent {
@@ -143,7 +164,9 @@ class LeaveFeedback extends PureComponent {
                 customers!
               </StyledH4>
               <CopyH4>To share your review, copy and paste your feedback below.</CopyH4>
-              <TextArea value={comment} disabled />
+              <CommentDiv>
+                <p>{comment}</p>
+              </CommentDiv>
               <ButtonContainer>
                 <A
                   href="https://www.amazon.com/review/review-your-purchases"
