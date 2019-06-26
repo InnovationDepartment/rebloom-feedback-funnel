@@ -8,6 +8,15 @@
 # misc
 .DS_Store
 .env
+.git
+.prettierrc.js
+
+# src files
+/components
+/pages
+/redux
+/utils
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
