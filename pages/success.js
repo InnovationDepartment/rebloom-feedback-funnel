@@ -28,6 +28,17 @@ const BottleImage = styled.img.attrs(props => ({
   `};
 `
 
+const MobileBottleImage = styled(BottleImage)`
+  ${media.small`
+    display: block;
+    width: 80px;
+    margin: auto;
+  `};
+  ${media.medium`
+    display: none;
+  `};
+`
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,20 +50,37 @@ const TextContainer = styled.div`
 `
 
 const StyledH1 = styled(H1)`
-  text-align: left;
   font-family: 'Silka-Bold';
   font-weight: 400;
+  ${media.small`
+    text-align: center;
+  `};
+  ${media.medium`
+    text-align: left;
+  `};
 `
 
 const StyledH3 = styled(H3)`
-  text-align: left;
-  margin-bottom: 30px;
   font-weight: 400;
+  ${media.small`
+    text-align: center;
+    margin-bottom: 20px;
+  `};
+  ${media.medium`
+    text-align: left;
+    margin-bottom: 30px;
+  `};
 `
 
 const SmallerCopy = styled(StyledH3)`
   font-size: 32px;
   font-family: 'Lato';
+  ${media.small`
+    margin-top: 20px;
+  `};
+  ${media.medium`
+    margin-top: 0;
+  `};
 `
 
 const LandingPage = () => (
@@ -63,11 +91,13 @@ const LandingPage = () => (
       <TextContainer>
         <StyledH1>Success!</StyledH1>
         <StyledH3>We told you it would be easy.</StyledH3>
+
+        <MobileBottleImage />
         <SmallerCopy>
           Your free reBloom is on the way. Look out for a confirmation email with tracking
           information.
         </SmallerCopy>
-        <SmallerCopy>Sweet dreams.</SmallerCopy>
+        <SmallerCopy>Sweet dreams!</SmallerCopy>
       </TextContainer>
     </Container>
   </Fragment>
