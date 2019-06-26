@@ -4,7 +4,7 @@ import { ServerStyleSheet, createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Silka-Bold';
-    src: url('/static/assets/fonts/Silka-SemiBold.otf');
+    src: url('/static/assets/fonts/Silka-Medium.otf');
   }
   @font-face {
     font-family: 'Silka-Regular';

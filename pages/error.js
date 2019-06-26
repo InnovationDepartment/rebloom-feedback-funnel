@@ -20,6 +20,7 @@ const LogoImage = styled.img`
 `
 const Heading = styled(H2)`
   font-family: 'Silka-Bold';
+  font-weight: 400;
   ${media.small`
     margin-bottom: 0;
   `};

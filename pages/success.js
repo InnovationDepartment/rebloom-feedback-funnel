@@ -41,6 +41,7 @@ const TextContainer = styled.div`
 const StyledH1 = styled(H1)`
   text-align: left;
   font-family: 'Silka-Bold';
+  font-weight: 400;
 `
 
 const StyledH3 = styled(H3)`

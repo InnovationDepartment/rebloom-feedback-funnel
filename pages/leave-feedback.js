@@ -13,7 +13,7 @@ import { updateEntry, clearErrors } from '../redux/actions/entries'
 import { H2, H4 } from '../components/text'
 
 const HeaderH2 = styled(H2)`
-  font-weight: 700;
+  font-weight: 400;
   font-family: 'Silka-Bold';
   margin: 0;
   ${media.small`
