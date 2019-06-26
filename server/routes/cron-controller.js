@@ -14,7 +14,6 @@ router.post(
       startDate = subHours(new Date(), 5).toISOString(),
       endDate = addHours(new Date(), 1).toISOString(),
     } = req.body
-    // const { startDate = subHours(new Date(), 5), endDate = addHours(new Date(), 1) } = req.body
     await requestAmazonReport(startDate, endDate)
     res.status(200).send()
   })
