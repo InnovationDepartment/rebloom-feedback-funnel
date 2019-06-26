@@ -18,7 +18,15 @@ const LogoImage = styled.img`
   position: absolute;
   top: 10px;
 `
-
+const Heading = styled(H2)`
+  font-family: 'Silka-Bold';
+  ${media.small`
+    margin-bottom: 0;
+  `};
+  ${media.medium`
+    margin-bottom: 0;
+  `};
+`
 const StyledH2 = styled(H2)`
   font-weight: 400;
   font-family: 'Silka-Regular';
@@ -102,7 +110,7 @@ class Error extends Component {
         <Head title="reBloom" />
         <Container>
           <TextContainer>
-            <H1>{header}</H1>
+            <Heading>{header}</Heading>
             <StyledH2>{subheader}</StyledH2>
             {body1 && <StyledH4>{body1}</StyledH4>}
             {body2 && <StyledH4>{body2}</StyledH4>}

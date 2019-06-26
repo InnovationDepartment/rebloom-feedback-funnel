@@ -4,7 +4,7 @@ import { ServerStyleSheet, createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Silka-Bold';
-    src: url('/static/assets/fonts/Silka-Bold.otf');
+    src: url('/static/assets/fonts/Silka-SemiBold.otf');
   }
   @font-face {
     font-family: 'Silka-Regular';
@@ -16,6 +16,12 @@ const GlobalStyle = createGlobalStyle`
   }
   a, a:hover, a:active, a:visited, a:focus {
     text-decoration:none;
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+    
 }
 `
 export default class MyDocument extends Document {
