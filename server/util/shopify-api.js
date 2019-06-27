@@ -30,10 +30,18 @@ const createShopifyOrder = async data => {
       zip,
       country_code: 'US',
     },
+    shipping_lines: [
+      {
+        title: 'Free Shipping',
+        price: '0.00',
+        code: 'Free Shipping',
+      },
+    ],
     tags: 'bonus-bottle',
     test: process.env.APP_ENV !== 'production',
   })
 }
+
 
 module.exports = {
   createShopifyOrder,
