@@ -108,14 +108,6 @@ router.post(
   })
 )
 
-// router.post(
-//   '/process-order',
-//   asyncWrapper(async (req, res) => {
-//     const order = await createShopifyOrder()
-//     res.status(200).send(order)
-//   })
-// )
-
 router.post(
   '/generate-bonus-order',
   asyncWrapper(async (req, res) => {
@@ -134,6 +126,13 @@ router.post(
       state: shipping_state,
       zip: shipping_zip,
     } = shipping
+
+    const duplicateAddressEntry = await Entries.findOne({
+      where: { shipping_line1: { [Op.eq]: shipping_line1 } },
+    })
+    if (duplicateAddressEntry && duplicateAddressEntry.has_redeemed) {
+      throw new createError(400, 'existing-entry')
+    }
 
     const entry = await Entries.findOne({
       where: {
