@@ -9,7 +9,7 @@ import Head from '../components/Head'
 import Container from '../components/Container'
 import TermsAndConditions from '../components/TandC'
 import { PrimaryButton } from '../components/buttons'
-import { H2, H4 } from '../components/text'
+import { H1, H2, H4 } from '../components/text'
 
 const LogoImage = styled.img`
   height: 40px;
@@ -90,24 +90,6 @@ const UnderlinedLink = styled(StyledA)`
 const ContactInfoDiv = styled.div`
   max-width: 93%;
 `
-
-const BackButton = styled(PrimaryButton)`
-  position: absolute;
-  left: 10%;
-  width: fit-content;
-  height: fit-content;
-  z-index: 100;
-  ${media.small`
-    top: 40px;
-    font-size: 18px;
-    width: fit-content !important;
-    padding: 13px 30px;
-  `};
-  ${media.medium`
-    top: 50px;
-    font-size: 24px;
-  `};
-`
 class Error extends Component {
   render() {
     const { router } = this.props
@@ -127,7 +109,6 @@ class Error extends Component {
     return (
       <div>
         <Head title="reBloom" />
-        <BackButton onClick={() => Router.back()}>Back</BackButton>
         <Container>
           <TextContainer>
             <Heading>{header}</Heading>
