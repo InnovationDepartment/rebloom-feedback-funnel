@@ -21,7 +21,7 @@ const Head = props => (
     <meta property="og:image" content={props.ogImage || defaultOGImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <link rel="icon" href="static/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="static/assets/images/favicon.png" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap"
       rel="stylesheet"
