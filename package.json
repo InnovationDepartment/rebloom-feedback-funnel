@@ -41,7 +41,7 @@
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.8.7",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^5.5.0",
     "shopify-api-node": "^2.19.3",
     "styled-components": "^4.2.0",
